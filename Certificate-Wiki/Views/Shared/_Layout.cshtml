@@ -1,48 +1,67 @@
-﻿<!DOCTYPE html>
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Certificate_Wiki</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+	<!---->
+	<link rel="canonical" href="https://certificate.wiki" />
+	<link rel="stylesheet" href="~/css/global.css" media="all" />
+	<link rel="stylesheet" href="~/css/master.css" media="all" />
+	<link rel="stylesheet" href="~/css/mobile.css" media="all" />
+	<link href="https://fonts.googleapis.com/css2?family=Lobster&family=Roboto:wght@300&display=swap"
+		  rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap"
+		  rel="stylesheet" />
+	<!---->
+	<meta name="description"
+		  content="Upload you certificates from udemy, linkedin or school and show them of to your employer, friends and family" />
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<!---->
+	<title>Certificate</title>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Certificate_Wiki</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+	<header>
+		<h1><a asp-action="index" asp-controller="home" class="header-logo">Stianlife.com</a></h1>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2020 - Certificate_Wiki - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @RenderSection("Scripts", required: false)
+		<ul class="header-list">
+			<li>
+				<a asp-action="index" asp-controller="home" class="header-item header-home">Home</a>
+			</li>
+			<li>
+				<a asp-action="search" asp-controller="certificate" class="header-item header-certificate">
+					Certificate
+				</a>
+			</li>
+			<li>
+				<a asp-action=" asp-controller="home" class="header-item header-about">About</a>
+			</li>
+			<li>
+				<a asp-action="manage" asp-controller="profile" class="header-item header-profile">Manage Profile</a>
+			</li>
+		</ul>
+		<!-- IF NOT LOGGED IN!-->
+		<ul class="header-authenticate">
+			<li>
+				<a asp-action="login" asp-controller="auth" id="login">Login</a>
+			</li>
+			<li>
+				<a asp-action="register" asp-controller="auth" id="register">Register</a>
+			</li>
+		</ul>
+	</header>
+	<div class="content-wrapper">
+		<main role="main">
+			@RenderBody()
+		</main>
+
+		<footer>
+			<p>© &copy; 2020 - Stian Håve - About</p>
+			<p>
+				this work is licenced under Creative Commons Attributions 4.0
+				International license
+			</p>
+		</footer>
+	</div>
+	<script src="~/js/site.js" asp-append-version="true"></script>
 </body>
 </html>

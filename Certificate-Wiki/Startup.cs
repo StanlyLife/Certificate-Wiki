@@ -1,34 +1,67 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
+using Certificate_Wiki.Data;
+using Certificate_Wiki.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 
 namespace Certificate_Wiki {
+
 	public class Startup {
+
 		public Startup(IConfiguration configuration) {
 			Configuration = configuration;
 		}
 
 		public IConfiguration Configuration { get; }
 
-		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services) {
 			services.AddControllersWithViews();
+
+			services.AddDbContext<CertificateDbContext>(options => {
+				var connectionString = "Data Source=(LocalDb)\\MSSQLLocalDB;" +
+											   "database=LocalCertifyDb;" +
+											   "trusted_connection=yes;";
+
+				var myMigrationAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
+				options.UseSqlServer(connectionString, sql => {
+					sql.MigrationsAssembly(myMigrationAssembly);
+				});
+			});
+
+			services.AddIdentity<CertificateUser, IdentityRole>(options => {
+				//Change this before deployment
+				options.SignIn.RequireConfirmedEmail = false;
+
+				options.Password.RequireNonAlphanumeric = false;
+
+				options.User.RequireUniqueEmail = true;
+
+				options.Lockout.AllowedForNewUsers = true;
+				options.Lockout.MaxFailedAccessAttempts = 5;
+				//Increase?
+				options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(1);
+			}).AddEntityFrameworkStores<CertificateDbContext>().AddDefaultTokenProviders();
+
+			services.ConfigureApplicationCookie(options => options.LoginPath = "/Auth/login");
 		}
 
-		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env) {
 			if (env.IsDevelopment()) {
 				app.UseDeveloperExceptionPage();
 			} else {
 				app.UseExceptionHandler("/Home/Error");
-				// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
 				app.UseHsts();
 			}
 			app.UseHttpsRedirection();
