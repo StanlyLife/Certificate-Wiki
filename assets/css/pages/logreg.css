@@ -1,0 +1,88 @@
+.content {
+  padding: 3rem;
+  display: flex;
+}
+
+.content-image {
+  background-color: var(--color-light);
+  padding: 2rem;
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.content-image {
+  font-family: var(--font-header);
+  color: #555;
+}
+
+.content-form {
+  background-color: var(--color-first);
+  padding: 1rem 3rem;
+  flex: 1;
+}
+
+main {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/*form*/
+.content-form,
+.content-form form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.content-form form {
+  height: 100%;
+  width: 100%;
+}
+
+.content-form input {
+  padding: 1rem;
+  text-align: center;
+  width: 100%;
+  border: none;
+  background: rgba(255, 255, 255, 0.486);
+  border-radius: 0.5rem;
+}
+.content-form button {
+  border: none;
+  height: 5vh;
+  border-radius: 0.5rem;
+  color: var(--color-text);
+  font-weight: 600;
+  cursor: pointer;
+  border: 2px solid white;
+
+  transition: color 0.15s ease-in-out, border 0.15s ease-in-out,
+    background 0.15s ease-in-out;
+}
+
+.content-form button:hover {
+  color: white;
+  background-color: var(--color-light);
+  border: 2px solid var(--color-text);
+}
+
+.content-form h1 {
+  color: #333;
+  font-family: var(--font-header);
+  text-align: center;
+}
+
+.content-form h6 {
+  font-family: var(--font-header);
+  color: #555;
+  text-align: center;
+}
+
+.content-form p {
+  font-family: var(--font-roboto);
+  text-align: center;
+  color: #555;
+}
