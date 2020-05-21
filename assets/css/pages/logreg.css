@@ -86,3 +86,21 @@ main {
   text-align: center;
   color: #555;
 }
+
+.content-form p span {
+  /* font-weight: 600; */
+  font-family: var(--font-header);
+}
+
+.content-form a {
+  color: var(--color-light);
+  font-family: var(--font-header);
+  text-align: center;
+  font-size: 0.75rem;
+  padding: 0.25rem;
+  transition: color 0.2s ease-in-out;
+}
+
+.content-form a:hover {
+  color: #333;
+}
