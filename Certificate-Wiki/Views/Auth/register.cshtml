@@ -1,6 +1,7 @@
 ﻿@{
 	ViewData["Title"] = "register";
 }
+@model Certificate_Wiki.Models.LoginRegister.RegisterModel
 <link rel="stylesheet" href="~/css/pages/logreg.css" media="all" />
 <div class="background"></div>
 <div class="content">
@@ -21,16 +22,18 @@
 			<span>never</span>
 			send you unwanted emails
 		</p>
-		<form action="">
+		<div asp-validation-summary="All"></div>
+		<form asp-action="Register" method="post">
 			<div class="form-row">
-				<input type="text" placeholder="Email" />
+				<input asp-for="Email" type="text" placeholder="Email" />
 			</div>
 			<div class="form-row">
-				<input type="password" placeholder="password" />
+				<input asp-for="Password" type="password" placeholder="password" />
 			</div>
+			<div asp-validation-for="Password"></div>
 			<div class="form-row">
-				<input type="password" placeholder="confirm password" />
+				<input asp-for="ConfirmPassword" type="password" placeholder="confirm password" />
 			</div>
-			<button>Register</button>
+			<button type="submit">Register</button>
 		</form>
 	</div>
