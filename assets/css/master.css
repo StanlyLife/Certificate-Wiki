@@ -38,10 +38,14 @@ header h1 {
   display: flex;
   flex: 2;
 }
+.header-list a {
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s ease-in-out, border-bottom 0.2s ease-in-out;
+}
 
 .header-list a:hover {
   color: var(--color-text);
-  border-bottom: 1px solid var(--color-first);
+  border-bottom: 2px solid var(--color-first);
 }
 
 .header-authenticate {
