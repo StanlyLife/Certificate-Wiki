@@ -1,3 +1,104 @@
+/*Header*/
+
 header {
-  border: 2px solid red;
+  width: 100%;
+  display: flex;
+  height: var(--header-height);
+  align-items: center;
+}
+
+.header-active {
+  color: var(--color-first);
+  pointer-events: none;
+}
+
+.header-logo,
+.header-list,
+.header-authenticate {
+  padding: 1vh;
+  justify-content: space-evenly;
+  font-family: var(--font-header);
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.header-logo {
+  font-size: 1.5rem;
+}
+
+header h1 {
+  flex: 1;
+  display: flex;
+  color: var(--color-first);
+  justify-content: center;
+  align-items: center;
+}
+
+.header-list {
+  display: flex;
+  flex: 2;
+}
+
+.header-list a:hover {
+  color: var(--color-text);
+  border-bottom: 1px solid var(--color-first);
+}
+
+.header-authenticate {
+  flex: 1;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.header-authenticate a {
+  padding: 0.5rem 1rem;
+  background-color: var(--color-first);
+  border: 1px solid var(--color-first);
+  border-radius: 0.5rem;
+  color: white;
+  font-weight: 200;
+  transition: background-color 0.25s ease-in-out, color 0.25s ease-in-out;
+}
+
+.header-authenticate #login {
+  color: var(--color-first);
+  background-color: transparent;
+}
+
+.header-authenticate #login:hover {
+  background-color: var(--color-first);
+  color: white;
+}
+.header-authenticate #register:hover {
+  color: var(--color-first);
+  background-color: transparent;
+}
+
+/*END Header*/
+/**/
+
+.content-wrapper {
+  position: relative;
+  min-height: calc(100vh - var(--header-height));
+}
+
+main {
+  min-height: inherit;
+  position: relative;
+}
+
+footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 0.5rem;
+
+  padding: var(--footer-padding) 0;
+  height: var(--footer-height);
+  width: 100%;
+
+  position: absolute;
+  bottom: 0;
 }
