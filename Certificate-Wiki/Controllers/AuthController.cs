@@ -11,18 +11,57 @@ using Microsoft.AspNetCore.Authorization;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Security.Claims;
+using System.Threading;
 
 namespace Certificate_Wiki.Controllers {
 
 	public class AuthController : Controller {
 		private readonly UserManager<CertificateUser> userManager;
+		private readonly IUserClaimsPrincipalFactory<CertificateUser> claimsPrincipalFactory;
 
-		public AuthController(UserManager<CertificateUser> UserManager) {
+		public AuthController(UserManager<CertificateUser> UserManager, IUserClaimsPrincipalFactory<CertificateUser> ClaimsPrincipalFactory) {
 			userManager = UserManager;
+			claimsPrincipalFactory = ClaimsPrincipalFactory;
 		}
 
+		[HttpGet]
 		[Route("login")]
 		public IActionResult login() {
+			return View();
+		}
+
+		[HttpPost]
+		[Route("login")]
+		public async Task<IActionResult> loginAsync(LoginModel model) {
+			if (!ModelState.IsValid) { Console.WriteLine("Modelstate invalid"); return View(model); }
+
+			var user = await userManager.FindByEmailAsync(model.Email);
+
+			if (user == null) {
+				ModelState.AddModelError("All", "No user with that email exists");
+				return View(model);
+			}
+
+			var result = await userManager.CheckPasswordAsync(user, model.Password);
+			if (!result) {
+				ModelState.AddModelError("All", "Password did not match email");
+				return View(model);
+			}
+
+			//2FA
+
+			//Add claims
+			var Identity = new ClaimsIdentity(IdentityConstants.ApplicationScheme);
+			Identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id));
+			Identity.AddClaim(new Claim(ClaimTypes.Email, user.Email));
+			Identity.AddClaim(new Claim(ClaimTypes.Name, user.UserName));
+			await HttpContext.SignInAsync(IdentityConstants.ApplicationScheme, new ClaimsPrincipal(Identity));
+			//Login
+			//lockout
+			var principal = await claimsPrincipalFactory.CreateAsync(user);
+			await HttpContext.SignInAsync(IdentityConstants.ApplicationScheme, principal);
+
+			Console.WriteLine("Logged in!");
 			return View();
 		}
 
@@ -58,7 +97,8 @@ namespace Certificate_Wiki.Controllers {
 				return View(model);
 			}
 
-			return View("Success");
+			Console.WriteLine("registered!");
+			return View();
 			//Email confirmation
 
 			//Send link to email
