@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,10 +9,10 @@ namespace Certificate_Wiki.Models.LoginRegister {
 
 	public class LoginModel {
 
-		[NotNull]
+		[Required]
 		public string Email { get; set; }
 
-		[NotNull]
+		[Required]
 		public string Password { get; set; }
 	}
 }
