@@ -1,2 +1,2 @@
-# Certificate-Wiki
-This is the recreated version of Certify
+# Certificate.Wiki
+This project is a redesign of certify.
