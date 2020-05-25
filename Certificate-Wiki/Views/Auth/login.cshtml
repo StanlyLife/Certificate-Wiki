@@ -1,6 +1,7 @@
 ﻿@{
 	ViewData["Title"] = "login";
 }
+@model Certificate_Wiki.Models.LoginRegister.LoginModel
 <link rel="stylesheet" href="~/css/pages/logreg.css" media="all" />
 
 <div class="background"></div>
@@ -21,12 +22,13 @@
 			Upload you certificates and create a profile! Share your work with
 			employers, friends and family!
 		</p>
-		<form action="">
+		<div asp-validation-summary="All"></div>
+		<form asp-action="Login" method="post">
 			<div class="form-row">
-				<input type="text" placeholder="Email" />
+				<input asp-for="Email" type="text" placeholder="Email" />
 			</div>
 			<div class="form-row">
-				<input type="password" placeholder="password" />
+				<input asp-for="Password" type="password" placeholder="password" />
 			</div>
 			<button>Register</button>
 		</form>
