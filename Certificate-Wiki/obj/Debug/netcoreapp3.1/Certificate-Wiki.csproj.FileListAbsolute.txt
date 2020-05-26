@@ -147,3 +147,4 @@ C:\Users\stian\source\repos\Certificate-Wiki\Certificate-Wiki\bin\Debug\netcorea
 C:\Users\stian\source\repos\Certificate-Wiki\Certificate-Wiki\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\stian\source\repos\Certificate-Wiki\Certificate-Wiki\obj\Debug\netcoreapp3.1\Certificate-Wiki.csproj.CoreCompileInputs.cache
 C:\Users\stian\source\repos\Certificate-Wiki\Certificate-Wiki\obj\Debug\netcoreapp3.1\Certificate-Wiki.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\stian\source\repos\Certificate-Wiki\Certificate-Wiki\obj\Debug\netcoreapp3.1\Razor\Views\Search\index.cshtml.g.cs
