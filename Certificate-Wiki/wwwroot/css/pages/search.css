@@ -1,3 +1,95 @@
-﻿body {
-	background: orange;
+﻿/* TODO */
+/* Clean and organize*/
+
+.content {
+	width: 90vw;
+	margin: auto;
+}
+
+table {
+}
+
+.search-header {
+	background: var(--color-first);
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	margin-bottom: 5vh;
+}
+
+.search-left {
+	flex: 1;
+	padding: 2rem;
+}
+
+.search-right {
+	flex: 1;
+	font-family: var(--font-header);
+	color: white;
+}
+
+	.search-right p {
+		color: #666;
+	}
+
+
+table tr {
+	display: flex;
+	justify-content: space-between;
+}
+
+table th {
+	flex: 1;
+}
+
+table td {
+	overflow: hidden;
+	flex: 1;
+	max-height: 5vh;
+}
+
+	table td:last-child {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	table td img {
+		transition: opacity .25s ease-out;
+	}
+
+		table td img:hover {
+			cursor: pointer;
+			opacity: 50%;
+		}
+
+tbody tr {
+	border-bottom: 2px solid #00000021;
+	width: 95%;
+	margin: 0 auto;
+	padding: .5rem;
+}
+
+thead tr {
+	height: 5vh;
+	display: flex;
+	justify-content: space-between;
+	padding: 2px;
+	align-items: center;
+	width: 95%;
+	margin: 0 auto;
+}
+
+
+thead {
+	background: var(--color-text);
+	color: snow;
+	font-family: var(--font-header);
+}
+
+tbody {
+	background: var(--color-light);
+	font-family: var(--font-roboto);
+	font-weight: 600;
+	color: #666;
 }

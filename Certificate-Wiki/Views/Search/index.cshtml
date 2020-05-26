@@ -4,8 +4,60 @@
 
 <link rel="stylesheet" href="~/css/pages/search.css" media="all" />
 
-<h1>index</h1>
 
 <div class="background"></div>
 <div class="content">
+	<div class="search-header">
+		<div class="search-left">
+			<img src="~/images/Search/Component 1 – 1.png" alt="error loading image" />
+		</div>
+		<div class="search-right">
+			<h1>Search Certificates</h1>
+			<p>Search certificate by name or user by email</p>
+			<form action="post" asp-action="">
+				<input type="search" placeholder="Search" value="" />
+				<button class="search-btn">Search</button>
+			</form>
+		</div>
+	</div>
+	<div class="table-wrapper">
+		<table>
+			<thead>
+				<tr>
+					<th>Certificate</th>
+					<th>Description</th>
+					<th>Subject</th>
+					<th>Site</th>
+					<th>Author</th>
+					<th>View</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>how to learn programming</td>
+					<td>
+						Ut fusce varius nisl ac ipsum gravida vel pretium tellus tincidunt integer eu augue augue nunc elit dolor, luctus placerat.
+					</td>
+					<td>computer science</td>
+					<td>LinkedinLearning</td>
+					<td>Stian</td>
+					<td>
+						<img src="~/images/Search/Component 2 – 1.png" alt="Error loading image" />
+					</td>
+				</tr>
+				<tr>
+					<td>how to learn programming</td>
+					<td>
+						Ut fusce varius nisl ac ipsum gravida vel pretium tellus tincidunt integer eu augue augue nunc elit dolor, luctus placerat.
+					</td>
+					<td>computer science</td>
+					<td>LinkedinLearning</td>
+					<td>Stian</td>
+					<td>
+						<img src="~/images/Search/Component 2 – 1.png" alt="Error loading image" />
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 </div>
