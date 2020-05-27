@@ -6,8 +6,6 @@
 	margin: auto;
 }
 
-table {
-}
 
 .search-header {
 	background: var(--color-first);
@@ -17,15 +15,55 @@ table {
 	margin-bottom: 5vh;
 }
 
+	.search-header form {
+		display: flex;
+		width: 50%;
+		align-items: center;
+		justify-content: center;
+	}
+
+		.search-header form input {
+			flex: 3;
+			margin: .25rem;
+			padding: .5rem;
+			border-radius: 8px;
+			border: none;
+		}
+
+		.search-header form button {
+			border-radius: 8px;
+			color: white;
+			transition: background .25s ease-out;
+			cursor: pointer;
+			background: var(--color-text);
+			border: none;
+			flex: 1;
+			width: 25%;
+			margin: .25rem;
+			padding: .5rem;
+			font-family: var(--font-header);
+			font-weight: 600;
+		}
+
+			.search-header form button:hover {
+				background: var(--color-light);
+				color: var(--color-text);
+			}
+
 .search-left {
 	flex: 1;
 	padding: 2rem;
 }
 
 .search-right {
-	flex: 1;
+	flex: 2;
 	font-family: var(--font-header);
 	color: white;
+	margin: .5rem;
+	padding: .5rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 	.search-right p {
@@ -33,35 +71,39 @@ table {
 	}
 
 
-table tr {
-	display: flex;
-	justify-content: space-between;
+table {
+	width: 100%;
 }
 
-table th {
-	flex: 1;
-}
-
-table td {
-	overflow: hidden;
-	flex: 1;
-	max-height: 5vh;
-}
-
-	table td:last-child {
+	table tr {
 		display: flex;
-		justify-content: center;
-		align-items: center;
+		justify-content: space-between;
 	}
 
-	table td img {
-		transition: opacity .25s ease-out;
+	table th {
+		flex: 1;
 	}
 
-		table td img:hover {
-			cursor: pointer;
-			opacity: 50%;
+	table td {
+		overflow: hidden;
+		flex: 1;
+		max-height: 5vh;
+	}
+
+		table td:last-child {
+			display: flex;
+			justify-content: center;
+			align-items: center;
 		}
+
+		table td img {
+			transition: opacity .25s ease-out;
+		}
+
+			table td img:hover {
+				cursor: pointer;
+				opacity: 50%;
+			}
 
 tbody tr {
 	border-bottom: 2px solid #00000021;
