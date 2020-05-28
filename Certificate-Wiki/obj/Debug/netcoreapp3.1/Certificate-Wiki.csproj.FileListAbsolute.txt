@@ -148,3 +148,4 @@ C:\Users\stian\source\repos\Certificate-Wiki\Certificate-Wiki\bin\Debug\netcorea
 C:\Users\stian\source\repos\Certificate-Wiki\Certificate-Wiki\obj\Debug\netcoreapp3.1\Certificate-Wiki.csproj.CoreCompileInputs.cache
 C:\Users\stian\source\repos\Certificate-Wiki\Certificate-Wiki\obj\Debug\netcoreapp3.1\Certificate-Wiki.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\stian\source\repos\Certificate-Wiki\Certificate-Wiki\obj\Debug\netcoreapp3.1\Razor\Views\Search\index.cshtml.g.cs
+C:\Users\stian\source\repos\Certificate-Wiki\Certificate-Wiki\obj\Debug\netcoreapp3.1\Razor\Views\Profile\Index.cshtml.g.cs
