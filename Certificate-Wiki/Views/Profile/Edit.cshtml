@@ -1,0 +1,51 @@
+﻿@{
+	ViewData["Title"] = "Edit Profile";
+}
+
+<link rel="stylesheet" href="~/css/pages/ProfileEdit.css" media="all" />
+
+
+<div class="background"></div>
+<div class="content">
+	<div class="content-image">
+		<img src="~/images/profile/Component 1 – 1.png" alt="" />
+	</div>
+	<div class="content-profile">
+		<div class="profile-image">
+			<img src="https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png" alt="error loading image" />
+		</div>
+		<div class="profile-form">
+			<form asp-action="Edit" method="post">
+
+				<div class="form-row">
+					<label>First Name</label>
+					<input type="text" name="fname" />
+				</div>
+				<div class="form-row">
+					<label>Last Name</label>
+					<input type="text" name="lname" />
+				</div>
+				<div class="form-row">
+					<label>Occupation</label>
+					<input type="text" name="occupation" />
+				</div>
+				<div class="form-row">
+					<label>Website</label>
+					<input type="url" name="website" />
+				</div>
+				<div class="form-row">
+					<label>Profile Description</label>
+					<textarea type="text" name="description"></textarea>
+				</div>
+				<div class="form-row">
+					<label>Private Profile</label>
+					<input type="checkbox" name="Private" />
+				</div>
+
+				<div class="form-row">
+					<button type="submit">Save</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
