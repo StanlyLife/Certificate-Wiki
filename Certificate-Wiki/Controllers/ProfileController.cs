@@ -12,5 +12,10 @@ namespace Certificate_Wiki.Controllers {
 		public IActionResult Index() {
 			return View();
 		}
+
+		[Route("Profile/edit")]
+		public IActionResult Edit() {
+			return View();
+		}
 	}
 }
