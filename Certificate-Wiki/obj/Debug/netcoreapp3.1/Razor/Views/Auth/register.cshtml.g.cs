@@ -27,7 +27,7 @@ using Certificate_Wiki.Models;
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"ddb20cf0fa13e2a6984b54ff03ff76a268f3c3cb", @"/Views/Auth/register.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"22e6ebdcc48985566541d90c94f404fc51fbd973", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"d3614aef277d3c718fb8a814b495d192744d773f", @"/Views/_ViewImports.cshtml")]
     public class Views_Auth_register : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<Certificate_Wiki.Models.LoginRegister.RegisterModel>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("rel", new global::Microsoft.AspNetCore.Html.HtmlString("stylesheet"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
