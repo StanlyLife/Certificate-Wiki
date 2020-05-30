@@ -106,3 +106,33 @@ footer {
   position: absolute;
   bottom: 0;
 }
+
+/*logout*/
+
+form {
+    padding: 0 2rem;
+}
+
+.logout-button {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--color-first);
+    border-radius: 0.5rem;
+    background-color: transparent;
+    color: var(--color-first);
+    font-weight: 200;
+    transition: background-color 0.25s ease-in-out, color 0.25s ease-in-out;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+.logout-button:hover {
+    background-color: transparent;
+    color: var(--color-first);
+    background-color: var(--color-first);
+    color: white;
+}
+
+.profile-form {
+    display: flex;
+    flex-direction: column;
+}

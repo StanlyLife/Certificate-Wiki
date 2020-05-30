@@ -1,97 +1,73 @@
 .content {
-    padding: 2vh 5vw;
+	padding: 2vh 5vw;
 }
 
-    .content article {
-        padding: 1rem;
-        display: flex;
-        font-family: var(--font-header);
-        flex-direction: column;
-        justify-content: center;
-    }
+	.content article {
+		padding: 1rem;
+		display: flex;
+		font-family: var(--font-header);
+		flex-direction: column;
+		justify-content: center;
+	}
 
 .content-child {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1vh 0;
-    position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 1vh 0;
+	position: relative;
 }
 
-    .content-child > article,
-    .content-child > .content-image {
-        flex: 1;
-        height: 50vh;
-        font-weight: 400;
-    }
+	.content-child > article,
+	.content-child > .content-image {
+		flex: 1;
+		height: 50vh;
+		font-weight: 400;
+	}
 
-    .content-child article span {
-        color: var(--color-text);
-    }
+	.content-child article span {
+		color: var(--color-text);
+	}
 
-    .content-child article h1 {
-        font-size: 2.3rem;
-        color: #555;
-    }
+	.content-child article h1 {
+		font-size: 2.3rem;
+		color: #555;
+	}
 
-    .content-child article h6 {
-        font-size: 1.2rem;
-        font-weight: 500;
-        color: #666;
-    }
+	.content-child article h6 {
+		font-size: 1.2rem;
+		font-weight: 500;
+		color: #666;
+	}
 
-    .content-child .content-image img {
-        height: inherit;
-    }
+	.content-child .content-image img {
+		height: inherit;
+	}
 
 /*specified children*/
 
 /*child one*/
 .content-child-one article h1 {
-    width: 80%;
+	width: 80%;
 }
 
 .content-child-one article h6 {
-    width: 50%;
+	width: 50%;
 }
 
 .content-child-one .content-image img {
-    position: absolute;
-    right: 0;
-    z-index: -1;
-    transform: translate(30%);
+	position: absolute;
+	right: 0;
+	z-index: -1;
+	transform: translate(30%);
 }
 
 .content-child-one .content-image {
 }
 
 .content-child-one article {
-    flex: 2;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+	flex: 2;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
-/*logout*/
-
-form {
-    padding: 0 2rem;
-}
-
-button {
-    padding: 0.5rem 1rem;
-    border: 1px solid var(--color-first);
-    border-radius: 0.5rem;
-    background-color: transparent;
-    color: var(--color-first);
-    font-weight: 200;
-    transition: background-color 0.25s ease-in-out, color 0.25s ease-in-out;
-    margin: 0 auto;
-    cursor: pointer;
-}
-
-    button:hover {
-        background-color: transparent;
-        color: var(--color-first);
-        background-color: var(--color-first);
-        color: white;
-    }
