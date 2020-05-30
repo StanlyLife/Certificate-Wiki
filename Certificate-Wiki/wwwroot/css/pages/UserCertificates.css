@@ -1,0 +1,96 @@
+﻿body {
+}
+
+.content {
+	width: 90vw;
+	margin: 0 auto;
+}
+
+.profile {
+	margin: 5vh auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+	.profile img {
+		max-height: 10vh;
+		border-radius: 500px;
+	}
+
+	.profile h1 {
+		padding: 1rem;
+		font-family: var(--font-header);
+	}
+
+
+.user-certificates {
+	margin: 5vh 0;
+}
+
+tr {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+td {
+	padding: .25rem;
+	flex: 1;
+	height: calc(5vh + .25rem);
+	/*    overflow: hidden; */
+	font-family: var(--font-roboto);
+	font-weight: 600;
+	color: #333;
+	display: flex;
+	width: calc(90vw / 6);
+}
+
+	td p {
+		text-overflow: ellipsis;
+		/*TODO*/
+		/*Fix elipsis*/
+		white-space: nowrap;
+		width: inherit;
+		flex: 1;
+		overflow: hidden;
+		max-width: inherit;
+	}
+
+thead {
+	background: var(--color-first);
+	font-family: var(--font-header);
+	color: white;
+}
+
+th {
+	padding: 1rem;
+	flex: 1;
+	height: 5vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+tbody {
+	background: var(--color-light);
+}
+
+	tbody td {
+		flex: 1;
+		text-align: center;
+		display: flex;
+		align-items: center;
+		justify-content: space-evenly;
+	}
+
+
+
+		tbody td:last-child span {
+			transition: color .25s ease-out;
+			cursor: pointer;
+		}
+
+			tbody td:last-child span:hover {
+				color: white;
+			}
