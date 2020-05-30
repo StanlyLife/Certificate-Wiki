@@ -28,26 +28,37 @@
 				<a asp-action="index" asp-controller="home" class="header-item header-home">Home</a>
 			</li>
 			<li>
-				<a asp-action="search" asp-controller="certificate" class="header-item header-certificate">
+				<a asp-action="index" asp-controller="search" class="header-item header-certificate">
 					Certificate
 				</a>
 			</li>
 			<li>
-				<a asp-action=" asp-controller="home" class="header-item header-about">About</a>
+				<a asp-action="About" asp-controller="home" class="header-item header-about">About</a>
 			</li>
 			<li>
-				<a asp-action="manage" asp-controller="profile" class="header-item header-profile">Manage Profile</a>
+				<a asp-action="edit" asp-controller="profile" class="header-item header-profile">Manage Profile</a>
 			</li>
 		</ul>
 		<!-- IF NOT LOGGED IN!-->
-		<ul class="header-authenticate">
-			<li>
-				<a asp-action="login" asp-controller="auth" id="login">Login</a>
-			</li>
-			<li>
-				<a asp-action="register" asp-controller="auth" id="register">Register</a>
-			</li>
-		</ul>
+		@if (User.Identity == null) {
+
+			<ul class="header-authenticate">
+				<li>
+					<a asp-action="login" asp-controller="auth" id="login">Login</a>
+				</li>
+				<li>
+					<a asp-action="register" asp-controller="auth" id="register">Register</a>
+				</li>
+			</ul>
+		} else {
+			<ul>
+				<li>
+					<form method="post" asp-action="logout" asp-controller="auth">
+						<button type="submit">logout</button>
+					</form>
+				</li>
+			</ul>
+		}
 	</header>
 	<div class="content-wrapper">
 		<main role="main">
