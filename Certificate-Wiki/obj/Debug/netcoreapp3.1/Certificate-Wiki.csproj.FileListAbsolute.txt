@@ -151,3 +151,5 @@ C:\Users\stian\source\repos\Certificate-Wiki\Certificate-Wiki\obj\Debug\netcorea
 C:\Users\stian\source\repos\Certificate-Wiki\Certificate-Wiki\obj\Debug\netcoreapp3.1\Razor\Views\Profile\Index.cshtml.g.cs
 C:\Users\stian\source\repos\Certificate-Wiki\Certificate-Wiki\obj\Debug\netcoreapp3.1\Razor\Views\Profile\Edit.cshtml.g.cs
 C:\Users\stian\source\repos\Certificate-Wiki\Certificate-Wiki\obj\Debug\netcoreapp3.1\Razor\Views\Certificate\Edit.cshtml.g.cs
+C:\Users\stian\source\repos\Certificate-Wiki\Certificate-Wiki\obj\Debug\netcoreapp3.1\Razor\Views\Certificate\Upload.cshtml.g.cs
+C:\Users\stian\source\repos\Certificate-Wiki\Certificate-Wiki\obj\Debug\netcoreapp3.1\Razor\Views\Certificate\User.cshtml.g.cs

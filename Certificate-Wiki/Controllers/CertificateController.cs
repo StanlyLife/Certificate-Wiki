@@ -11,5 +11,12 @@ namespace Certificate_Wiki.Controllers {
 		public IActionResult Edit() {
 			return View();
 		}
+
+		public IActionResult Upload() {
+			return View();
+		}
+		public IActionResult user() {
+			return View();
+		}
 	}
 }
