@@ -69,6 +69,7 @@ namespace Certificate_Wiki {
 
 			app.UseRouting();
 
+			app.UseAuthentication();
 			app.UseAuthorization();
 
 			app.UseEndpoints(endpoints => {

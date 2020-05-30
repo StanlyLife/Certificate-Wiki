@@ -18,10 +18,12 @@ namespace Certificate_Wiki.Controllers {
 	public class AuthController : Controller {
 		private readonly UserManager<CertificateUser> userManager;
 		private readonly IUserClaimsPrincipalFactory<CertificateUser> claimsPrincipalFactory;
+		private readonly SignInManager<CertificateUser> signInManager;
 
-		public AuthController(UserManager<CertificateUser> UserManager, IUserClaimsPrincipalFactory<CertificateUser> ClaimsPrincipalFactory) {
+		public AuthController(UserManager<CertificateUser> UserManager, IUserClaimsPrincipalFactory<CertificateUser> ClaimsPrincipalFactory, SignInManager<CertificateUser> signInManager) {
 			userManager = UserManager;
 			claimsPrincipalFactory = ClaimsPrincipalFactory;
+			this.signInManager = signInManager;
 		}
 
 		[HttpGet]
@@ -51,15 +53,18 @@ namespace Certificate_Wiki.Controllers {
 			//2FA
 
 			//Add claims
-			var Identity = new ClaimsIdentity(IdentityConstants.ApplicationScheme);
-			Identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id));
-			Identity.AddClaim(new Claim(ClaimTypes.Email, user.Email));
-			Identity.AddClaim(new Claim(ClaimTypes.Name, user.UserName));
+			var claims = new List<Claim> {
+			new Claim(ClaimTypes.NameIdentifier, user.Id),
+			new Claim(ClaimTypes.Email, user.Email),
+			new Claim(ClaimTypes.Name, user.UserName)
+			};
+			var Identity = new ClaimsIdentity(claims, IdentityConstants.ApplicationScheme);
 			await HttpContext.SignInAsync(IdentityConstants.ApplicationScheme, new ClaimsPrincipal(Identity));
 			//Login
-			//lockout
-			var principal = await claimsPrincipalFactory.CreateAsync(user);
-			await HttpContext.SignInAsync(IdentityConstants.ApplicationScheme, principal);
+
+			// ADD lockout
+			//var principal = await claimsPrincipalFactory.CreateAsync(user);
+			//await HttpContext.SignInAsync(IdentityConstants.ApplicationScheme, principal);
 
 			Console.WriteLine("Logged in!");
 			return View();
