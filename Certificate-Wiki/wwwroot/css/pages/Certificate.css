@@ -1,0 +1,121 @@
+﻿body {
+}
+
+.content {
+	display: flex;
+	width: 90vw;
+	margin: 5vh auto;
+}
+
+.content-image {
+	background: var(--color-light);
+	flex: 1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+}
+
+	.content-image img {
+		padding: 1rem;
+		max-height: 50vh;
+		width: auto;
+	}
+
+.content-profile {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	flex: 1;
+	padding: 1rem;
+	background: var(--color-first);
+}
+
+.profile-image {
+	flex: 1;
+	margin: 0 auto;
+}
+
+	.profile-image img {
+		max-height: 20vh;
+		border-radius: 500px;
+		width: auto;
+		flex: 1;
+	}
+
+.profile-form {
+	margin: 1rem;
+	flex: 3;
+	width: 90%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+	.profile-form form {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		width: 100%;
+	}
+
+.form-row {
+	flex: 1;
+	margin: .5rem;
+	display: flex;
+	justify-content: space-between;
+	padding: .25rem;
+	align-items: center;
+	font-family: var(--font-header);
+	font-weight: 600;
+	width: 100%;
+}
+
+	.form-row input, .form-row textarea {
+		border: none;
+		border-bottom: 2px solid var(--color-text);
+		font-family: var(--font-roboto);
+		background: transparent;
+		flex: 3;
+	}
+
+	.form-row label {
+		flex: 2;
+	}
+
+	.form-row button {
+		margin: 0 auto;
+		width: 25%;
+		padding: .5rem 1rem;
+		border: none;
+		border-radius: 8px;
+		font-family: var(--font-header);
+		font-weight: 700;
+		color: var(--color-text);
+		border: 2px solid transparent;
+		transition: background .25s ease-out, border .25s ease-out;
+	}
+
+		.form-row button:hover {
+			background: transparent;
+			border: 2px solid var(--color-text);
+		}
+
+/*Certificate*/
+
+.certificate {
+	display: flex;
+	flex-direction: column;
+}
+
+.radio-buttons {
+	margin: .25rem 0;
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+}
+
+.certificate-file, .certificate-url {
+	display: none;
+}
