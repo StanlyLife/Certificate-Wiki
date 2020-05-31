@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Certificate_Wiki.Migrations
 {
     [DbContext(typeof(CertificateDbContext))]
-    [Migration("20200523182115_initial")]
-    partial class initial
+    [Migration("20200531032303_initial-migration")]
+    partial class initialmigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -34,6 +34,9 @@ namespace Certificate_Wiki.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Country")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
@@ -78,6 +81,9 @@ namespace Certificate_Wiki.Migrations
                     b.Property<byte[]>("ProfilePicture")
                         .HasColumnType("varbinary(max)");
 
+                    b.Property<string>("ProfilePictureUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -90,6 +96,9 @@ namespace Certificate_Wiki.Migrations
 
                     b.Property<string>("Website")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("isPrivate")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
