@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Certificate_Wiki.Models;
-using Certificate_Wiki.Models.Profile;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -26,15 +25,15 @@ namespace Certificate_Wiki.Controllers {
 		[Authorize]
 		[Route("Profile/edit")]
 		public async Task<IActionResult> EditAsync() {
-			//var Profile = await userManager.FindByEmailAsync(User.Identity.Name);
-			return View();
+			var Profile = await userManager.FindByEmailAsync(User.Identity.Name);
+			return View(Profile);
 		}
 
 		[ValidateAntiForgeryToken]
 		[HttpPost]
 		[Authorize]
 		[Route("Profile/edit")]
-		public async Task<IActionResult> EditAsync(EditProfileModel model) {
+		public async Task<IActionResult> EditAsync(CertificateUser model) {
 			//TODO
 			//Remove CW from single-line if
 			if (!ModelState.IsValid) { Console.WriteLine("Modelstate invalid"); return View(model); }

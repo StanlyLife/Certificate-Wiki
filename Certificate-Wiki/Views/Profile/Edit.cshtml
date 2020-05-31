@@ -1,7 +1,7 @@
 ﻿@{
 	ViewData["Title"] = "Edit Profile";
 }
-
+@model Certificate_Wiki.Models.CertificateUser
 <link rel="stylesheet" href="~/css/pages/ProfileEdit.css" media="all" />
 
 <div class="background"></div>
@@ -15,31 +15,37 @@
 		</div>
 		<div class="profile-form">
 			<h2>"(at) username"</h2>
+			<div asp-validation-summary="All">
+			</div>
 			<form asp-action="Edit" method="post">
 
 				<div class="form-row">
 					<label>First Name</label>
-					<input type="text" name="fname" />
+					<input asp-for="FirstName" type="text" name="fname" />
 				</div>
 				<div class="form-row">
 					<label>Last Name</label>
-					<input type="text" name="lname" />
+					<input asp-for="LastName" type="text" name="lname" />
 				</div>
 				<div class="form-row">
 					<label>Occupation</label>
-					<input type="text" name="occupation" />
+					<input asp-for="Occupation" type="text" name="occupation" />
 				</div>
 				<div class="form-row">
 					<label>Website</label>
-					<input type="url" name="website" />
+					<input asp-for="Website" type="url" name="website" />
+				</div>
+				<div class="form-row">
+					<label>Country</label>
+					<input asp-for="Country" type="text" name="Country" />vg
 				</div>
 				<div class="form-row">
 					<label>Profile Description</label>
-					<textarea type="text" name="description"></textarea>
+					<textarea asp-for="Description" type="text" name="description"></textarea>
 				</div>
 				<div class="form-row">
 					<label>Private Profile</label>
-					<input type="checkbox" name="Private" />
+					<input asp-for="isPrivate" type="checkbox" name="Private" />
 				</div>
 
 				<div class="form-row">
