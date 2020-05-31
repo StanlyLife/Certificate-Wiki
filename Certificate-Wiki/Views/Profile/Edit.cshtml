@@ -14,18 +14,18 @@
 			<img src="https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png" alt="error loading image" />
 		</div>
 		<div class="profile-form">
-			<h2>"(at) username"</h2>
+			<h2>@User.Identity.Name</h2>
 			<div asp-validation-summary="All">
 			</div>
 			<form asp-action="Edit" method="post">
 
 				<div class="form-row">
 					<label>First Name</label>
-					<input asp-for="FirstName" type="text" name="fname" />
+					<input asp-for="FirstName" type="text"  />
 				</div>
 				<div class="form-row">
 					<label>Last Name</label>
-					<input asp-for="LastName" type="text" name="lname" />
+					<input asp-for="LastName" type="text"  />
 				</div>
 				<div class="form-row">
 					<label>Occupation</label>
@@ -37,7 +37,7 @@
 				</div>
 				<div class="form-row">
 					<label>Country</label>
-					<input asp-for="Country" type="text" name="Country" />vg
+					<input asp-for="Country" type="text" name="Country" />
 				</div>
 				<div class="form-row">
 					<label>Profile Description</label>
