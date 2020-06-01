@@ -85,7 +85,7 @@
 
 	.form-row button {
 		margin: 0 auto;
-		width: 25%;
+		width: 40%;
 		padding: .5rem 1rem;
 		border: none;
 		border-radius: 8px;
@@ -110,3 +110,22 @@
 		.form-row input[type='checkbox']:checked {
 			background: var(--color-text);
 		}
+
+/*delete btn*/
+
+.delete-btn {
+	background: indianred;
+	color: white !important;
+}
+
+	.delete-btn:hover {
+		background: red !important;
+		border: 2px solid red !important;
+	}
+
+
+
+
+.delete-confirm {
+	display: none;
+}
