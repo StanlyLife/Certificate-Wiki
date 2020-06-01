@@ -35,9 +35,7 @@ namespace Certificate_Wiki.Controllers {
 		[Authorize]
 		[Route("Profile/edit")]
 		public async Task<IActionResult> EditAsync([FromForm]CertificateUser model) {
-			//TODO
-			//Remove CW from single-line if
-			if (!ModelState.IsValid) { Console.WriteLine("Modelstate invalid"); return View(model); }
+			if (!ModelState.IsValid) { return View(model); }
 
 			var Profile = await userManager.FindByEmailAsync(User.Identity.Name);
 			if (Profile == null) { return View(); }
@@ -48,9 +46,8 @@ namespace Certificate_Wiki.Controllers {
 			Profile.Country = model.Country;
 			Profile.Occupation = model.Occupation;
 			Profile.Website = model.Website;
+			Profile.isPrivate = model.isPrivate;
 			await userManager.UpdateAsync(Profile);
-
-			Console.WriteLine("Update success");
 
 			return RedirectToAction("Index");
 		}

@@ -1,7 +1,14 @@
 ﻿@{
 	ViewData["Title"] = "Edit Profile";
 }
+@inject Microsoft.AspNetCore.Identity.UserManager<CertificateUser> userManager
 @model Certificate_Wiki.Models.CertificateUser
+
+@{
+
+	var user = await userManager.FindByNameAsync(User.Identity.Name);
+}
+
 <link rel="stylesheet" href="~/css/pages/ProfileEdit.css" media="all" />
 
 <div class="background"></div>
@@ -21,36 +28,39 @@
 
 				<div class="form-row">
 					<label>First Name</label>
-					<input asp-for="FirstName" type="text"  />
+					<input asp-for="FirstName" type="text" />
 				</div>
 				<div class="form-row">
 					<label>Last Name</label>
-					<input asp-for="LastName" type="text"  />
+					<input asp-for="LastName" type="text" />
 				</div>
 				<div class="form-row">
 					<label>Occupation</label>
-					<input asp-for="Occupation" type="text" name="occupation" />
+					<input asp-for="Occupation" type="text" />
 				</div>
 				<div class="form-row">
 					<label>Website</label>
-					<input asp-for="Website" type="url" name="website" />
+					<input asp-for="Website" type="url" />
 				</div>
 				<div class="form-row">
 					<label>Country</label>
-					<input asp-for="Country" type="text" name="Country" />
+					<input asp-for="Country" type="text" />
 				</div>
 				<div class="form-row">
 					<label>Profile Description</label>
-					<textarea asp-for="Description" type="text" name="description"></textarea>
+					<textarea asp-for="Description" type="text"></textarea>
 				</div>
 				<div class="form-row">
 					<label>Private Profile</label>
-					<input asp-for="isPrivate" type="checkbox" name="Private" />
+					@Html.CheckBoxFor(x => x.isPrivate)
 				</div>
 
 				<div class="form-row">
 					<button type="submit">Save</button>
 				</div>
+			</form>
+			<form class="delete-form">
+				<button class="delete-btn" type="submit">Delete account</button>
 			</form>
 		</div>
 	</div>
