@@ -11,9 +11,11 @@ namespace Certificate_Wiki.Controllers {
 
 	public class ProfileController : Controller {
 		private readonly UserManager<CertificateUser> userManager;
+		private readonly SignInManager<CertificateUser> signInManager;
 
-		public ProfileController(UserManager<CertificateUser> userManager) {
+		public ProfileController(UserManager<CertificateUser> userManager, SignInManager<CertificateUser> signInManager) {
 			this.userManager = userManager;
+			this.signInManager = signInManager;
 		}
 
 		[Route("Profile")]
@@ -50,6 +52,16 @@ namespace Certificate_Wiki.Controllers {
 			await userManager.UpdateAsync(Profile);
 
 			return RedirectToAction("Index");
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> DeleteAccountAsync() {
+			var user = await userManager.FindByNameAsync(User.Identity.Name);
+			await userManager.DeleteAsync(user);
+			await signInManager.SignOutAsync();
+			return RedirectToAction("index", "home");
+			//TODO
+			//Delete certificates
 		}
 	}
 }
