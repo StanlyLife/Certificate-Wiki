@@ -59,9 +59,14 @@
 					<button type="submit">Save</button>
 				</div>
 			</form>
-			<form class="delete-form">
-				<button class="delete-btn" type="submit">Delete account</button>
+			<form class="delete-form" asp-action="DeleteAccount">
+				<div class="form-row">
+				<button class="delete-btn" type="button">Delete account</button>
+				<button class="delete-btn delete-confirm" type="submit">Yes delete</button>
+				</div>
 			</form>
 		</div>
 	</div>
 </div>
+
+<script src="~/js/DeleteBtn.js"></script>
