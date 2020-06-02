@@ -67,7 +67,7 @@ namespace Certificate_Wiki.Controllers {
 			//await HttpContext.SignInAsync(IdentityConstants.ApplicationScheme, principal);
 
 			Console.WriteLine("Logged in!");
-			return View();
+			return RedirectToAction("index","home");
 		}
 
 		[HttpGet]
