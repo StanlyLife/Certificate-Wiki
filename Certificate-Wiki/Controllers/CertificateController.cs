@@ -19,8 +19,16 @@ namespace Certificate_Wiki.Controllers {
 			this.userManager = userManager;
 		}
 
-		public IActionResult Edit() {
-			return View();
+		[Authorize]
+		[HttpGet]
+		public async Task<IActionResult> UserAsync(CertificateViewModel model) {
+			CertificateViewModel certificates = new CertificateViewModel();
+			CertificateUser user = await userManager.FindByNameAsync(User.Identity.Name);
+			certificates.certificateList = CertificateHandler.GetByUserId(user.Id);
+			if (certificates.certificateList.Count() < 1) {
+				certificates.hasCertificates = false;
+			}
+			return View(certificates);
 		}
 
 		[HttpGet]
@@ -41,10 +49,6 @@ namespace Certificate_Wiki.Controllers {
 			CertificateHandler.Create(model);
 
 			return RedirectToAction("user");
-		}
-
-		public IActionResult user() {
-			return View();
 		}
 	}
 }
