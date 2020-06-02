@@ -72,16 +72,26 @@
 	width: 100%;
 }
 
+	/*input fiekds*/
+
 	.form-row input, .form-row textarea {
 		border: none;
 		border-bottom: 2px solid var(--color-text);
 		font-family: var(--font-roboto);
 		background: transparent;
 		flex: 3;
+		color: #333;
+		font-size: .75rem;
+		font-weight: 800;
 	}
 
+
+
+	/*labels*/
 	.form-row label {
 		flex: 2;
+		color: var(--color-text);
+		font-weight: 1000;
 	}
 
 	.form-row button {
@@ -95,6 +105,7 @@
 		color: var(--color-text);
 		border: 2px solid transparent;
 		transition: background .25s ease-out, border .25s ease-out;
+		cursor: pointer;
 	}
 
 		.form-row button:hover {
@@ -109,13 +120,47 @@
 	flex-direction: column;
 }
 
+
+.certificate-file, .certificate-url {
+	display: none
+}
+
+
+/*Radio buttons*/
+
 .radio-buttons {
 	margin: .25rem 0;
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	width: 100%;
 }
 
-.certificate-file, .certificate-url {
-	display: none;
+	.radio-buttons div {
+		width: 100%;
+		display: flex;
+		justify-content: space-evenly;
+		align-items: center;
+		margin: .25rem;
+	}
+
+	.radio-buttons input {
+		width: 100%;
+	}
+
+		.radio-buttons input[type="file"] {
+			border: none;
+		}
+
+/*header text*/
+
+.profile-form h2 {
+	color: var(--color-light);
+	font-family: var(--font-header);
+	font-weight: 1000;
+}
+
+/*How do you want to upload your certificate?*/
+
+.light-label {
+	color: var(--color-light);
 }
