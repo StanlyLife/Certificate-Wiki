@@ -4,6 +4,8 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Certificate_Wiki.Data;
+using Certificate_Wiki.Interface;
+using Certificate_Wiki.Interface.Implementation;
 using Certificate_Wiki.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -27,6 +29,7 @@ namespace Certificate_Wiki {
 		public IConfiguration Configuration { get; }
 
 		public void ConfigureServices(IServiceCollection services) {
+			services.AddScoped<ICertificateHandler, CertificateHandler>();
 			services.AddControllersWithViews();
 
 			services.AddDbContext<CertificateDbContext>(options => {
