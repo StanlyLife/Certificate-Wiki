@@ -94,3 +94,25 @@ tbody {
 			tbody td:last-child span:hover {
 				color: white;
 			}
+
+/*Upload certificate button*/
+
+.create-certificate a {
+	background: transparent;
+	font-family: var(--font-header);
+	border: 2px solid var(--color-first);
+	border-radius: 8px;
+	padding: .5rem 1rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 25%;
+	margin: 0 auto;
+	transition: color .25s ease-out, background .25s ease-out, border .25s ease-out;
+}
+
+	.create-certificate a:hover {
+		color: white;
+		background: var(--color-first);
+		border: 2px solid var(--color-text);
+	}
