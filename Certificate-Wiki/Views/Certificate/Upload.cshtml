@@ -33,18 +33,24 @@
 					<textarea type="text" asp-for="Description"></textarea>
 				</div>
 				<div class="form-row certificate">
-					<label>How do you want to upload your certificate?</label>
+					<label class="light-label">How do you want to upload your certificate?</label>
 					<div class="radio-buttons">
+						<div class="radio-button-label">
+
 						<label>upload file</label>
-						<input type="radio" value="upload" />
-						<div class="certificate-file">
+						<input type="radio" value="upload" id="file" name="certificate-type" />
+						</div>
+						<div class="certificate-file file-upload">
 							<input type="file" asp-for="CertificateFile" />
 						</div>
 					</div>
 					<div class="radio-buttons">
+						<div class="radio-button-label">
+
 						<label>upload by image url</label>
-						<input type="radio" value="url" name="certificate-type" />
-						<div class="certificate-file">
+						<input type="radio" value="url" name="certificate-type" id="url" />
+						</div>
+						<div class="certificate-file url-upload">
 							<input type="url" asp-for="CertificateUrl" />
 						</div>
 					</div>
@@ -57,4 +63,4 @@
 		</div>
 	</div>
 </div>
-<script src="~/js/certificate.js"></script>
+<script src="~/js/Certificate.js"></script>
