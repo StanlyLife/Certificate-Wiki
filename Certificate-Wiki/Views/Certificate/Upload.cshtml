@@ -1,6 +1,7 @@
 ﻿@{
 	ViewData["Title"] = "Edit Profile";
 }
+@model Certificates
 
 <link rel="stylesheet" href="~/css/pages/Certificate.css" media="all" />
 
@@ -12,38 +13,39 @@
 	<div class="content-profile">
 		<div class="profile-form">
 			<h2>upload certificate</h2>
-			<form asp-action="Edit" method="post">
+			<form asp-action="upload" method="post">
+				<div asp-validation-summary="All"></div>
 
 				<div class="form-row">
 					<label>Certificate name</label>
-					<input type="text" name="certificate" />
+					<input type="text" asp-for="CertificateName" />
 				</div>
 				<div class="form-row">
 					<label>Subject</label>
-					<input type="text" name="lname" />
+					<input type="text" asp-for="Subject" />
 				</div>
 				<div class="form-row">
 					<label>Admissioner</label>
-					<input type="text" name="occupation" />
+					<input type="text" asp-for="Admissioner" />
 				</div>
 				<div class="form-row">
-					<label>Website</label>
-					<input type="url" name="website" />
+					<label>Description</label>
+					<textarea type="text" asp-for="Description"></textarea>
 				</div>
 				<div class="form-row certificate">
 					<label>How do you want to upload your certificate?</label>
 					<div class="radio-buttons">
 						<label>upload file</label>
-						<input type="radio" value="upload" name="certificate-type" />
+						<input type="radio" value="upload" />
 						<div class="certificate-file">
-							<input type="file" value="upload-file" />
+							<input type="file" asp-for="CertificateFile" />
 						</div>
 					</div>
 					<div class="radio-buttons">
 						<label>upload by image url</label>
 						<input type="radio" value="url" name="certificate-type" />
 						<div class="certificate-file">
-							<input type="url" value="upload-url" />
+							<input type="url" asp-for="CertificateUrl" />
 						</div>
 					</div>
 				</div>
