@@ -13,7 +13,7 @@
 	<div class="content-profile">
 		<div class="profile-form">
 			<h2>upload certificate</h2>
-			<form asp-action="upload" method="post">
+			<form asp-action="upload" method="post" enctype="multipart/form-data">
 				<div asp-validation-summary="All"></div>
 
 				<div class="form-row">
@@ -37,18 +37,18 @@
 					<div class="radio-buttons">
 						<div class="radio-button-label">
 
-						<label>upload file</label>
-						<input type="radio" value="upload" id="file" name="certificate-type" />
+							<label>upload file</label>
+							<input type="radio" value="upload" id="file" name="certificate-type" />
 						</div>
 						<div class="certificate-file file-upload">
-							<input type="file" asp-for="CertificateFile" />
+							<input type="file" name="file" />
 						</div>
 					</div>
 					<div class="radio-buttons">
 						<div class="radio-button-label">
 
-						<label>upload by image url</label>
-						<input type="radio" value="url" name="certificate-type" id="url" />
+							<label>upload by image url</label>
+							<input type="radio" value="url" name="certificate-type" id="url" />
 						</div>
 						<div class="certificate-file url-upload">
 							<input type="url" asp-for="CertificateUrl" />
