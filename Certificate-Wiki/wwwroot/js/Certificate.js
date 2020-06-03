@@ -4,6 +4,10 @@ const url = document.querySelector("#url");
 const fileUpload = document.querySelector(".file-upload");
 const urlUpload = document.querySelector(".url-upload");
 
+
+fileUpload.style.display = "none";
+urlUpload.style.display = "none";
+
 file.addEventListener("change", CheckSelected);
 url.addEventListener("change", CheckSelected);
 

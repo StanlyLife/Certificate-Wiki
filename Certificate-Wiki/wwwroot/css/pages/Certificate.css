@@ -122,7 +122,7 @@
 
 
 .certificate-file, .certificate-url {
-	display: none
+	display: none;
 }
 
 
@@ -156,11 +156,11 @@
 .profile-form h2 {
 	color: var(--color-light);
 	font-family: var(--font-header);
-	font-weight: 1000;
+	font-weight: 900;
 }
 
 /*How do you want to upload your certificate?*/
 
 .light-label {
-	color: var(--color-light);
+	color: var(--color-light) !important;
 }
