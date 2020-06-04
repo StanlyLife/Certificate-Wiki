@@ -9,11 +9,11 @@ namespace Certificate_Wiki.Interface {
 
 	public interface ICertificateHandler {
 
-		Certificates GetById(string id);
+		Certificates GetById(int id);
 
 		IEnumerable<Certificates> GetByUserId(string id);
 
-		Task<CertificateUser> GetAuthorByIdAsync(string id);
+		Task<CertificateUser> GetAuthorByIdAsync(int id);
 
 		int GetAmountOfCertificates();
 
@@ -23,7 +23,7 @@ namespace Certificate_Wiki.Interface {
 
 		Certificates Update(Certificates certificate);
 
-		bool Delete(string id);
+		bool Delete(int id);
 
 		bool SaveChanges();
 	}

@@ -25,7 +25,7 @@ namespace Certificate_Wiki.Interface.Implementation {
 			return certificate;
 		}
 
-		public bool Delete(string id) {
+		public bool Delete(int id) {
 			var status = db.CertificateContext.Remove(GetById(id));
 			return SaveChanges();
 		}
@@ -34,16 +34,18 @@ namespace Certificate_Wiki.Interface.Implementation {
 			return db.CertificateContext.Where(certificate => certificate.UserFk != null).Count();
 		}
 
-		public async Task<CertificateUser> GetAuthorByIdAsync(string id) {
+		public async Task<CertificateUser> GetAuthorByIdAsync(int id) {
 			var query = from entity in db.CertificateContext
-						where entity.CertificateId.Equals(id)
+						where entity.CertificateId == id
 						select entity.UserFk;
 
-			CertificateUser user = await userManager.FindByIdAsync(query.ToString());
+			Console.WriteLine("Query: ");
+			Console.WriteLine(query.FirstOrDefault());
+			CertificateUser user = await userManager.FindByIdAsync(query.FirstOrDefault());
 			return user;
 		}
 
-		public Certificates GetById(string id) {
+		public Certificates GetById(int id) {
 			return db.CertificateContext.Find(id);
 		}
 
@@ -82,6 +84,8 @@ namespace Certificate_Wiki.Interface.Implementation {
 		public Certificates Update(Certificates certificate) {
 			var entity = db.CertificateContext.Attach(certificate);
 			entity.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+			SaveChanges();
+
 			return certificate;
 		}
 	}
