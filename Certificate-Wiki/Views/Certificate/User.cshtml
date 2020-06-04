@@ -48,14 +48,17 @@
 							<span class="certificate-view">
 								<i class="fas fa-play-circle"></i>
 							</span>
-							<span class="certificate-edit">
+							<span class="certificate-delete">
 								<i class="fas fa-trash-alt"></i>
 							</span>
-							<span class="certificate-edit">
+							<span class="certificate-star">
+
 								<i class="fa fa-star"></i>
 							</span>
-							<span class="certificate-delete">
-								<i class="fas fa-edit"></i>
+							<span class="certificate-edit">
+								<a asp-action="upload" asp-route-id="@certificate.CertificateId">
+									<i class="fas fa-edit"></i>
+								</a>
 							</span>
 						</td>
 					</tr>
