@@ -100,6 +100,17 @@ namespace Certificate_Wiki.Controllers {
 			return RedirectToAction("user");
 		}
 
+		[ValidateAntiForgeryToken]
+		[Authorize]
+		[Route("Certificate/Delete/{id:int}")]
+		public IActionResult Delete(int id) {
+			var certificate = CertificateHandler.GetById(id);
+			if (certificate.UserFk == userManager.GetUserId(User)) {
+				CertificateHandler.Delete(id);
+			}
+			return RedirectToAction("User");
+		}
+
 		public async Task<bool> AuthorizeOwnerAsync(int id) {
 			var certificateAuthor = await CertificateHandler.GetAuthorByIdAsync(id);
 			var user = await userManager.FindByNameAsync(User.Identity.Name);
