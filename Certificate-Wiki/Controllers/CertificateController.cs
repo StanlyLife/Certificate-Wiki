@@ -40,14 +40,12 @@ namespace Certificate_Wiki.Controllers {
 		[Route("Certificate/e/{id:int?}")]
 		public async Task<IActionResult> UploadAsync(int? id) {
 			Certificates certificate = new Certificates();
-			if (id.HasValue && await AuthorizeOwnerAsync(id.Value)) {
+			if (id.HasValue) {
 				Console.WriteLine(id);
 				certificate = CertificateHandler.GetById(id.Value);
-				if (certificate.CertificateId != id.Value) {
-					return RedirectToAction("index", "index");
+				if (certificate == null || !await AuthorizeOwnerAsync(id.Value)) {
+					return RedirectToAction("index", "home");
 				}
-			} else {
-				return RedirectToAction("index", "home");
 			}
 			return View(certificate);
 		}
