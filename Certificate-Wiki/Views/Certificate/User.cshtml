@@ -49,7 +49,11 @@
 								<i class="fas fa-play-circle"></i>
 							</span>
 							<span class="certificate-delete">
-								<i class="fas fa-trash-alt"></i>
+								<form method="post" asp-action="delete" asp-route-id="@certificate.CertificateId">
+									<button class="trash-btn" type="submit">
+										<i class="fas fa-trash-alt"></i>
+									</button>
+								</form>
 							</span>
 							<span class="certificate-star">
 
