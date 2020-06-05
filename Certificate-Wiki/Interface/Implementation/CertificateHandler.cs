@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
 namespace Certificate_Wiki.Interface.Implementation {
@@ -58,15 +60,12 @@ namespace Certificate_Wiki.Interface.Implementation {
 		}
 
 		public IEnumerable<Certificates> GetCertificatesPages(int amountPerPage, int pageNumber) {
-			//The Id's start at 0
-			//for simplicity and readability i will add a filler Certificate at Id 0
 			if (pageNumber == 1) {
 				var PageOne = from entity in db.CertificateContext
 							  where entity.CertificateId < amountPerPage
 							  select entity;
 				return PageOne;
 			}
-			//For every page with exeption to page 1...
 			//The series are:
 			//((PageNum * AmountPerPage) - AmountPerPage) < certificate < (PageNum * AmountPerPage)
 			var query = from entity in db.CertificateContext
