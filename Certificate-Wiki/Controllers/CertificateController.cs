@@ -43,6 +43,11 @@ namespace Certificate_Wiki.Controllers {
 			if (id.HasValue && await AuthorizeOwnerAsync(id.Value)) {
 				Console.WriteLine(id);
 				certificate = CertificateHandler.GetById(id.Value);
+				if (certificate.CertificateId != id.Value) {
+					return RedirectToAction("index", "index");
+				}
+			} else {
+				return RedirectToAction("index", "home");
 			}
 			return View(certificate);
 		}
@@ -55,6 +60,12 @@ namespace Certificate_Wiki.Controllers {
 			//TODO
 			//Change subject to a <select> stored in database
 			//Add modelvalidators
+			Certificates certificateEntity = new Certificates();
+			if (id.HasValue) {
+				certificateEntity = CertificateHandler.GetById(id.Value);
+				if (certificateEntity.CertificateId == 0) { return RedirectToAction("Index", "Home"); }
+			}
+
 			if (file != null) {
 				//file upload
 				model.CertificateUrl = null;
@@ -65,7 +76,9 @@ namespace Certificate_Wiki.Controllers {
 			}
 
 			if (model.CertificateUrl == null && model.CertificateFile == null) {
-				ModelState.AddModelError("All", "You must upload or link to a certificate image");
+				if (!id.HasValue || !HasCertificate(id.Value)) {
+					ModelState.AddModelError("All", "You must upload or link to a certificate image");
+				}
 			}
 
 			if (model.CertificateUrl != null && model.CertificateFile != null) {
@@ -75,17 +88,13 @@ namespace Certificate_Wiki.Controllers {
 			if (!ModelState.IsValid) { return View(model); }
 
 			//If the user is updating a certificate and not creating a new one
+			model.UserFk = userManager.GetUserId(User);
 			if (id.HasValue && await AuthorizeOwnerAsync(id.Value)) {
-				//TODO
-				//If certificate is not uploaded, but certificate is present in DB, do not throw error
-				model.CertificateId = id.Value;
-				model.UserFk = userManager.GetUserId(User);
-				await TryUpdateModelAsync(model);
-				CertificateHandler.Update(model);
+				await TryUpdateModelAsync(certificateEntity);
+				CertificateHandler.Update(certificateEntity);
 				return RedirectToAction("user");
 			}
 
-			model.UserFk = userManager.GetUserId(User);
 			CertificateHandler.Create(model);
 
 			return RedirectToAction("user");
@@ -95,7 +104,7 @@ namespace Certificate_Wiki.Controllers {
 			var certificateAuthor = await CertificateHandler.GetAuthorByIdAsync(id);
 			var user = await userManager.FindByNameAsync(User.Identity.Name);
 
-			if (certificateAuthor.Email == user.Email) { return true; }
+			if (certificateAuthor != null && certificateAuthor.Email == user.Email) { return true; }
 			Console.WriteLine("not author");
 
 			return false;
@@ -109,6 +118,14 @@ namespace Certificate_Wiki.Controllers {
 			ms.Dispose();
 
 			return memoryStream;
+		}
+
+		public bool HasCertificate(int certificateId) {
+			var certificate = CertificateHandler.GetById(certificateId);
+			if (certificate.CertificateFile != null || certificate.CertificateUrl != null) {
+				return true;
+			}
+			return false;
 		}
 	}
 }
