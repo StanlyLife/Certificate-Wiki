@@ -126,3 +126,17 @@ table {
 		width: 100%;
 	}
 }
+
+.certificate-delete form button {
+	background: transparent;
+	border: none;
+}
+
+.certificate-delete form {
+	padding: 0;
+	margin: 0;
+}
+
+td span {
+	flex: 1;
+}
