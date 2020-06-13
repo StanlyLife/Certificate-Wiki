@@ -1,0 +1,36 @@
+﻿@{
+	ViewData["Title"] = "Index";
+}
+@model Certificate_Wiki.Models.Certificate.CertificateIndex
+
+<link rel="stylesheet" href="~/css/pages/CertificateIndex.css" media="all" />
+
+<div class="background"></div>
+<div class="content">
+
+	@if (!Model.IsPrivate || Model.IsOwner) {
+		<div class="certificate">
+			<div class="certificate-image">
+				@if (Model.CertificateFile == null) {
+					<canvas></canvas>
+				} else {
+					<img src="@Model.CertificateUrl" alt="" />
+				}
+			</div>
+			<div class="certificate-info">
+				<div class="info-first">
+
+					<h1>@Model.Certificate.CertificateName</h1>
+					<p>@Model.Certificate.Description</p>
+				</div>
+
+				<div class="info-second">
+					<p>@Model.Certificate.Subject</p>
+					<p>@Model.Certificate.Admissioner</p>
+				</div>
+			</div>
+		</div>
+	} else {
+
+	}
+</div>
