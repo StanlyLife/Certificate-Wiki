@@ -28,7 +28,7 @@ namespace Certificate_Wiki.Interface.Implementation {
 			var query = from entity in db.FavoriteCertificates
 						where entity.UserId == userId && entity.certificateId == CertificateId
 						select entity;
-			if (query.First() == null) {
+			if (query.ToList().Count() == 0) {
 				return false;
 			}
 			return true;
