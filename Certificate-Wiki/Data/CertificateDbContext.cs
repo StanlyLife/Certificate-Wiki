@@ -1,4 +1,5 @@
 ﻿using Certificate_Wiki.Models;
+using Certificate_Wiki.Models.Certificate;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ namespace Certificate_Wiki.Data {
 
 	public class CertificateDbContext : IdentityDbContext<CertificateUser> {
 		public DbSet<Certificates> CertificateContext { get; set; }
+		public DbSet<FavoriteCertificate> FavoriteCertificates { get; set; }
 
 		public CertificateDbContext(DbContextOptions<CertificateDbContext> options) : base(options) {
 			Database.EnsureCreated();
