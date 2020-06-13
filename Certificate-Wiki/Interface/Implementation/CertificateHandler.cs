@@ -1,13 +1,9 @@
 ﻿using Certificate_Wiki.Data;
 using Certificate_Wiki.Models;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.ConstrainedExecution;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
 namespace Certificate_Wiki.Interface.Implementation {
