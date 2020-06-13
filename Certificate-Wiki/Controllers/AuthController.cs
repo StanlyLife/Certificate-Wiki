@@ -67,7 +67,7 @@ namespace Certificate_Wiki.Controllers {
 			//await HttpContext.SignInAsync(IdentityConstants.ApplicationScheme, principal);
 
 			Console.WriteLine("Logged in!");
-			return RedirectToAction("index","home");
+			return RedirectToAction("index", "home");
 		}
 
 		[HttpGet]
@@ -112,6 +112,11 @@ namespace Certificate_Wiki.Controllers {
 		[Route("Forgotpassword")]
 		public IActionResult forgotpassword() {
 			return View();
+		}
+
+		public IActionResult logout() {
+			signInManager.SignOutAsync();
+			return RedirectToAction("index", "home");
 		}
 	}
 }
