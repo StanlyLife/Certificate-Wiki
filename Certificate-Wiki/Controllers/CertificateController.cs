@@ -17,10 +17,12 @@ namespace Certificate_Wiki.Controllers {
 	public class CertificateController : Controller {
 		private ICertificateHandler CertificateHandler;
 		private readonly UserManager<CertificateUser> userManager;
+		private readonly IFavoriteHandler favoriteHandler;
 
-		public CertificateController(ICertificateHandler certificateHandler, UserManager<CertificateUser> userManager) {
+		public CertificateController(ICertificateHandler certificateHandler, UserManager<CertificateUser> userManager, IFavoriteHandler favoriteHandler) {
 			this.CertificateHandler = certificateHandler;
 			this.userManager = userManager;
+			this.favoriteHandler = favoriteHandler;
 		}
 
 		[HttpGet]
@@ -62,6 +64,7 @@ namespace Certificate_Wiki.Controllers {
 			return View(certificates);
 		}
 
+		[Authorize]
 		[HttpGet]
 		[Route("Certificate/e/{id:int?}")]
 		public async Task<IActionResult> UploadAsync(int? id) {
@@ -122,6 +125,18 @@ namespace Certificate_Wiki.Controllers {
 			CertificateHandler.Create(model);
 			//If user is CREATING
 			return RedirectToAction("user");
+		}
+
+		[ValidateAntiForgeryToken]
+		[Authorize]
+		[Route("Favorite/{id:int}")]
+		public IActionResult Favorite(int id) {
+			FavoriteCertificate model = new FavoriteCertificate {
+				certificateId = id,
+				UserId = userManager.GetUserId(User)
+			};
+			favoriteHandler.ToggleFavorite(model);
+			return RedirectToAction("User");
 		}
 
 		[ValidateAntiForgeryToken]
