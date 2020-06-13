@@ -2,16 +2,32 @@
 	ViewData["Title"] = "Index";
 }
 @model Certificate_Wiki.Models.Certificate.CertificateIndex
+<script src="https://kit.fontawesome.com/f3cae94d9e.js" crossorigin="anonymous"></script>
 
 <link rel="stylesheet" href="~/css/pages/CertificateIndex.css" media="all" />
 
 <div class="background"></div>
+<div class="search">
+	<form method="post">
+		<button type="submit">
+			<i class="fas fa-search"></i>
+		</button>
+	</form>
+	@if (Model.IsOwner) {
+
+		<form method="get" asp-action="Upload" asp-route-id="@Model.Certificate.CertificateId">
+			<button type="submit">
+				<i class="far fa-edit"></i>
+			</button>
+		</form>
+	}
+</div>
 <div class="content">
 
 	@if (!Model.IsPrivate || Model.IsOwner) {
 		<div class="certificate">
 			<div class="certificate-image">
-				@if (Model.CertificateFile == null) {
+				@if (Model.CertificateFile != null) {
 					<canvas></canvas>
 				} else {
 					<img src="@Model.CertificateUrl" alt="" />
@@ -19,14 +35,31 @@
 			</div>
 			<div class="certificate-info">
 				<div class="info-first">
-
 					<h1>@Model.Certificate.CertificateName</h1>
 					<p>@Model.Certificate.Description</p>
 				</div>
 
 				<div class="info-second">
-					<p>@Model.Certificate.Subject</p>
-					<p>@Model.Certificate.Admissioner</p>
+
+					<p>
+						Owner
+						<span>
+							@Model.CertificateOwner.FirstName @Model.CertificateOwner.LastName
+						</span>
+					</p>
+					<p>
+						Subject
+						<span>
+
+							@Model.Certificate.Subject
+						</span>
+					</p>
+					<p>
+						Admissioner
+						<span>
+							@Model.Certificate.Admissioner
+						</span>
+					</p>
 				</div>
 			</div>
 		</div>
