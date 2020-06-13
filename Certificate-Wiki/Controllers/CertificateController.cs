@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Certificate_Wiki.Interface;
 using Certificate_Wiki.Migrations;
 using Certificate_Wiki.Models;
+using Certificate_Wiki.Models.Certificate;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -20,6 +21,31 @@ namespace Certificate_Wiki.Controllers {
 		public CertificateController(ICertificateHandler certificateHandler, UserManager<CertificateUser> userManager) {
 			this.CertificateHandler = certificateHandler;
 			this.userManager = userManager;
+		}
+
+		[HttpGet]
+		[Route("Certificate/View/{id:int}")]
+		public async Task<IActionResult> IndexAsync(int id) {
+			var model = new CertificateIndex { IsOwner = false };
+			var certificate = CertificateHandler.GetById(id);
+
+			if (certificate == null) { return RedirectToAction("Index", "Home"); }
+			model.Certificate = certificate;
+			model.CertificateOwner = await userManager.FindByIdAsync(certificate.UserFk);
+
+			if (model.CertificateOwner == null) { return RedirectToAction("Index", "Home"); }
+			if (model.CertificateOwner.UserName == User.Identity.Name) { model.IsOwner = true; }
+
+			if (model.Certificate.CertificateFile != null) {
+				model.CertificateUrl = GetImageUrl(model.Certificate);
+				model.CertificateFile = null;
+			}
+
+			model.IsPrivate = model.CertificateOwner.isPrivate;
+			/*TODO
+				Add link to profile in html
+			 */
+			return View(model);
 		}
 
 		[HttpGet]
@@ -85,7 +111,7 @@ namespace Certificate_Wiki.Controllers {
 
 			if (!ModelState.IsValid) { return View(model); }
 
-			//If the user is updating a certificate and not creating a new one
+			//If the user is UPDATING a certificate and not creating a new one
 			model.UserFk = userManager.GetUserId(User);
 			if (id.HasValue && await AuthorizeOwnerAsync(id.Value)) {
 				await TryUpdateModelAsync(certificateEntity);
@@ -94,7 +120,7 @@ namespace Certificate_Wiki.Controllers {
 			}
 
 			CertificateHandler.Create(model);
-
+			//If user is CREATING
 			return RedirectToAction("user");
 		}
 
@@ -134,6 +160,12 @@ namespace Certificate_Wiki.Controllers {
 				return true;
 			}
 			return false;
+		}
+
+		public string GetImageUrl(Certificates certificate) {
+			string imageDataBytes = Convert.ToBase64String(certificate.CertificateFile);
+			string imageUrl = string.Format("data:/image/jpeg;base64,{0}", imageDataBytes);
+			return imageUrl;
 		}
 	}
 }
