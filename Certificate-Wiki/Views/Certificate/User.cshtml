@@ -46,7 +46,9 @@
 						</td>
 						<td>
 							<span class="certificate-view">
-								<i class="fas fa-play-circle"></i>
+								<a asp-action="Index" asp-route-id="@certificate.CertificateId">
+									<i class="fas fa-play-circle"></i>
+								</a>
 							</span>
 							<span class="certificate-delete">
 								<form method="post" asp-action="delete" asp-route-id="@certificate.CertificateId">
