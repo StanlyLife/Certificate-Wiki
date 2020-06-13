@@ -58,8 +58,11 @@
 								</form>
 							</span>
 							<span class="certificate-star">
-
-								<i class="fa fa-star"></i>
+								<form method="post" asp-action="Favorite" asp-route-id="@certificate.CertificateId">
+									<button class="trash-btn" type="submit">
+										<i class="fa fa-star"></i>
+									</button>
+								</form>
 							</span>
 							<span class="certificate-edit">
 								<a asp-action="upload" asp-route-id="@certificate.CertificateId">
