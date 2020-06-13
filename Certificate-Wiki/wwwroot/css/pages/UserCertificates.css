@@ -88,11 +88,11 @@ tbody {
 
 		tbody td:last-child span {
 			transition: color .25s ease-out;
-			cursor: pointer;
 		}
 
-			tbody td:last-child span:hover {
+			tbody td:last-child span:hover, td button:hover {
 				color: white;
+				cursor: pointer;
 			}
 
 /*Upload certificate button*/
@@ -139,4 +139,18 @@ table {
 
 td span {
 	flex: 1;
+}
+
+.certificate-star form {
+	margin: 0;
+	padding: 0;
+}
+
+.certificate-star button {
+	border: none;
+	background: none;
+}
+
+td button, td a {
+	font-size: 1rem;
 }
