@@ -19,6 +19,12 @@ namespace Certificate_Wiki.Interface {
 
 		IEnumerable<Certificates> GetCertificatesPages(int amountPerPage, int pageNumber);
 
+		int GetCertificatesPagesResultAmount();
+
+		IEnumerable<Certificates> GetCertificatesPages(int amountPerPage, int pageNumber, string Search);
+
+		int GetCertificatesPagesResultAmount(string Search);
+
 		Certificates Create(Certificates certificate);
 
 		Certificates Update(Certificates certificate);

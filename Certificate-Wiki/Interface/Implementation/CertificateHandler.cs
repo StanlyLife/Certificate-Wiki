@@ -1,6 +1,7 @@
 ﻿using Certificate_Wiki.Data;
 using Certificate_Wiki.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -56,19 +57,42 @@ namespace Certificate_Wiki.Interface.Implementation {
 		}
 
 		public IEnumerable<Certificates> GetCertificatesPages(int amountPerPage, int pageNumber) {
-			if (pageNumber == 1) {
-				var PageOne = from entity in db.CertificateContext
-							  where entity.CertificateId < amountPerPage
-							  select entity;
-				return PageOne;
-			}
-			//The series are:
-			//((PageNum * AmountPerPage) - AmountPerPage) < certificate < (PageNum * AmountPerPage)
 			var query = from entity in db.CertificateContext
-						where entity.CertificateId > ((pageNumber * amountPerPage) - pageNumber) && entity.CertificateId < (pageNumber * pageNumber)
+						where entity != null
 						orderby entity.CertificateId
 						select entity;
-			return query;
+
+			if (pageNumber <= 1) {
+				return query.Take(amountPerPage);
+			}
+			return query.Skip((amountPerPage * pageNumber) - pageNumber).Take(amountPerPage);
+		}
+
+		public IEnumerable<Certificates> GetCertificatesPages(int amountPerPage, int pageNumber, string search) {
+			var query = from entity in db.CertificateContext
+						where entity.CertificateName.Contains(search)
+						orderby entity.CertificateName
+						select entity;
+			if (pageNumber <= 1) {
+				return query.Take(amountPerPage);
+			}
+			return query.Skip((amountPerPage * pageNumber) - pageNumber).Take(amountPerPage);
+		}
+
+		public int GetCertificatesPagesResultAmount(string search) {
+			var query = from entity in db.CertificateContext
+						where entity.CertificateName.Contains(search)
+						orderby entity.CertificateName
+						select entity;
+			return query.Count();
+		}
+
+		public int GetCertificatesPagesResultAmount() {
+			var query = from entity in db.CertificateContext
+						where entity != null
+						orderby entity.CertificateId
+						select entity;
+			return query.Count();
 		}
 
 		public bool SaveChanges() {
