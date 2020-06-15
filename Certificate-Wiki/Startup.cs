@@ -33,6 +33,9 @@ namespace Certificate_Wiki {
 			services.AddScoped<IFavoriteHandler, FavoriteHandler>();
 			services.AddControllersWithViews();
 
+			services.AddRazorPages()
+		.AddRazorRuntimeCompilation();
+
 			services.AddDbContext<CertificateDbContext>(options => {
 				var connectionString = "Data Source=(LocalDb)\\MSSQLLocalDB;" +
 											   "database=LocalCertifyDb;" +
