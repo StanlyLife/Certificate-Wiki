@@ -1,9 +1,8 @@
 ﻿@{
 	ViewData["Title"] = "index";
 }
-
+@model Certificate_Wiki.Models.Search.SearchModel
 <link rel="stylesheet" href="~/css/pages/search.css" media="all" />
-
 
 <div class="background"></div>
 <div class="content">
@@ -14,8 +13,8 @@
 		<div class="search-right">
 			<h1>Search Certificates</h1>
 			<p>Search certificate by name or user by email</p>
-			<form action="post">
-				<input type="search" placeholder="Search" value="" />
+			<form method="get" asp-route-page="1">
+				<input type="search" asp-for="search" placeholder="Search" />
 				<button class="search-btn">Search</button>
 			</form>
 		</div>
@@ -33,31 +32,45 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>how to learn programming</td>
-					<td>
-						Ut fusce varius nisl ac ipsum gravida vel pretium tellus tincidunt integer eu augue augue nunc elit dolor, luctus placerat.
-					</td>
-					<td>computer science</td>
-					<td>LinkedinLearning</td>
-					<td>Stian</td>
-					<td>
-						<img src="~/images/Search/Component 2 – 1.png" alt="Error loading image" />
-					</td>
-				</tr>
-				<tr>
-					<td>how to learn programming</td>
-					<td>
-						Ut fusce varius nisl ac ipsum gravida vel pretium tellus tincidunt integer eu augue augue nunc elit dolor, luctus placerat.
-					</td>
-					<td>computer science</td>
-					<td>LinkedinLearning</td>
-					<td>Stian</td>
-					<td>
-						<img src="~/images/Search/Component 2 – 1.png" alt="Error loading image" />
-					</td>
-				</tr>
+				@if (Model.certificatesResult != null) {
+
+					@foreach (var certificate in Model.certificatesResult.ToList()) {
+
+						<tr>
+							<td>@certificate.CertificateName</td>
+							<td>
+								@certificate.Description
+							</td>
+							<td>@certificate.Subject</td>
+							<td>@certificate.Admissioner</td>
+							<td>Certificate owner</td>
+							<td>
+								<a asp-action="Index" asp-controller="Certificate" asp-route-id="@certificate.CertificateId">
+									<img src="~/images/Search/Component 2 – 1.png" alt="Error loading image" />
+								</a>
+							</td>
+						</tr>
+					}
+				} else {
+					<tr>
+						<td>No certificates to display</td>
+					</tr>
+				}
 			</tbody>
 		</table>
+	</div>
+	<div class="pages">
+		<a asp-action="Index" asp-route-page="1" asp-route-search="@Model.search">
+			1
+		</a>
+		<a asp-action="Index" asp-route-page="2" asp-route-search="@Model.search">
+			2
+		</a>
+		<a asp-action="Index" asp-route-page="3" asp-route-search="@Model.search">
+			3
+		</a>
+		<a asp-action="Index" asp-route-page="2" asp-route-search="@Model.search">
+			4
+		</a>
 	</div>
 </div>
