@@ -36,11 +36,13 @@ namespace Certificate_Wiki.Controllers {
 		[HttpPost]
 		[Authorize]
 		[Route("Profile/edit")]
-		public async Task<IActionResult> EditAsync([FromForm]CertificateUser model) {
+		public async Task<IActionResult> EditAsync([FromForm]CertificateUser model, [FromForm] string cropped) {
+			
 			if (!ModelState.IsValid) { return View(model); }
-
+			Console.WriteLine(cropped);
 			var Profile = await userManager.FindByEmailAsync(User.Identity.Name);
 			if (Profile == null) { return View(); }
+
 			//Update database
 			Profile.FirstName = model.FirstName;
 			Profile.LastName = model.LastName;
@@ -49,6 +51,16 @@ namespace Certificate_Wiki.Controllers {
 			Profile.Occupation = model.Occupation;
 			Profile.Website = model.Website;
 			Profile.isPrivate = model.isPrivate;
+
+			//convert base64 image to byte array
+			if (!String.IsNullOrWhiteSpace(cropped))
+			{
+				cropped = cropped.Replace("data:image/png;base64,", "");
+				cropped = cropped.Trim();
+				byte[] imageBytes = Convert.FromBase64String(cropped);
+				Profile.ProfilePicture = imageBytes;
+			}
+
 			await userManager.UpdateAsync(Profile);
 
 			return RedirectToAction("Index");
