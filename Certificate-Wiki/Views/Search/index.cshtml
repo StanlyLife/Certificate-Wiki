@@ -32,7 +32,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				@if (Model.certificatesResult != null) {
+				@if (Model.certificateUsers == null && Model.certificatesResult.ToList().Count() > 0) {
 
 					@foreach (var certificate in Model.certificatesResult.ToList()) {
 
@@ -51,9 +51,20 @@
 							</td>
 						</tr>
 					}
+				} else if (Model.certificateUsers.ToList().Count() > 0) {
+					@foreach (var user in Model.certificateUsers.ToList()) {
+						if (user.isPrivate) {
+							<tr>
+								<td>Private user</td>
+							</tr>
+						}
+						<tr>
+							<td>@user.Email</td>
+						</tr>
+					}
 				} else {
 					<tr>
-						<td>No certificates to display</td>
+						<td>No certificates or users found</td>
 					</tr>
 				}
 			</tbody>
