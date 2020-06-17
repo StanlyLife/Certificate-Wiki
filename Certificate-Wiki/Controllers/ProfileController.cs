@@ -39,7 +39,6 @@ namespace Certificate_Wiki.Controllers {
 		public async Task<IActionResult> EditAsync([FromForm]CertificateUser model, [FromForm] string cropped) {
 			
 			if (!ModelState.IsValid) { return View(model); }
-			Console.WriteLine(cropped);
 			var Profile = await userManager.FindByEmailAsync(User.Identity.Name);
 			if (Profile == null) { return View(); }
 
