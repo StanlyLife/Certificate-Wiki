@@ -14,10 +14,15 @@ namespace Certificate_Wiki.Controllers {
 	public class SearchController : Controller {
 		private readonly UserManager<CertificateUser> userManager;
 		private readonly ICertificateHandler certificateHandler;
+		private readonly IUserSearch userSearch;
 
-		public SearchController(UserManager<CertificateUser> userManager, ICertificateHandler certificateHandler) {
+		public SearchController(
+			UserManager<CertificateUser> userManager,
+			ICertificateHandler certificateHandler,
+			IUserSearch userSearch) {
 			this.userManager = userManager;
 			this.certificateHandler = certificateHandler;
+			this.userSearch = userSearch;
 		}
 
 		//TODO
@@ -40,11 +45,6 @@ namespace Certificate_Wiki.Controllers {
 			var searchResult = certificateHandler.GetCertificatesPagesResultAmount();
 			searchModel.resultPages = (int)Math.Ceiling(Decimal.Divide(searchResult, resultsPerPage));
 
-			//TODO
-			//REMOVE CW
-			Console.WriteLine($"Divide and round: {searchResult},{resultsPerPage}");
-			Console.WriteLine($"Result pages: {searchModel.resultPages}");
-
 			if (currentPage.HasValue) {
 				searchModel.certificatesResult = certificateHandler.GetCertificatesPages(resultsPerPage, currentPage.Value);
 			} else {
@@ -58,13 +58,16 @@ namespace Certificate_Wiki.Controllers {
 			if (page.HasValue) {
 				currentPage = page.Value;
 			}
+
+			if (searchModel.search.Contains("@")) {
+				//TODO
+				//Add functionality
+				searchModel.certificateUsers = userSearch.SearchUserName(searchModel.search);
+				return searchModel;
+			}
+
 			int searchResult = certificateHandler.GetCertificatesPagesResultAmount(searchModel.search);
 			searchModel.resultPages = (int)Math.Ceiling(Decimal.Divide(searchResult, resultsPerPage));
-
-			Console.WriteLine($"Divide and round: {searchResult},{resultsPerPage}");
-			Console.WriteLine($"Result pages: {searchModel.resultPages}");
-			//TODO
-			//REMOVE CW
 
 			searchModel.certificatesResult = certificateHandler.GetCertificatesPages(resultsPerPage, currentPage, searchModel.search);
 			return searchModel;
