@@ -1,7 +1,7 @@
 ﻿@{
 	ViewData["Title"] = "User";
 }
-@model CertificateViewModel
+@model Certificate_Wiki.Models.Certificate.FavoriteAndCertificateModel
 <link rel="stylesheet" href="~/css/pages/UserCertificates.css" media="all" />
 
 <div class="background"></div>
@@ -22,7 +22,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				@foreach (var certificate in Model.certificateList.ToList()) {
+				@foreach (var certificate in Model.certificate.ToList()) {
 					<tr>
 						<td>
 							<p>
@@ -60,7 +60,12 @@
 							<span class="certificate-star">
 								<form method="post" asp-action="Favorite" asp-route-id="@certificate.CertificateId">
 									<button class="trash-btn" type="submit">
-										<i class="fa fa-star"></i>
+										@if (Model.isFavorite.ToList()[Model.counter]) {
+											<i class="fa fa-star star"></i>
+										} else {
+											<i class="fa fa-star favorited"></i>
+										}
+										@{ Model.counter++; }
 									</button>
 								</form>
 							</span>
