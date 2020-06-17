@@ -86,14 +86,14 @@ tbody {
 
 
 
-		tbody td:last-child span {
+		tbody td:last-child a, tbody td:last-child button {
 			transition: color .25s ease-out;
 		}
 
-			tbody td:last-child span:hover, td button:hover {
-				color: white;
-				cursor: pointer;
-			}
+		tbody td:last-child span:hover, td button:hover {
+			color: white;
+			cursor: pointer;
+		}
 
 /*Upload certificate button*/
 
@@ -154,3 +154,23 @@ td span {
 td button, td a {
 	font-size: 1rem;
 }
+
+.favorited {
+	color: #ffc32d;
+}
+
+	.favorited:hover {
+		color: inherit;
+	}
+
+.star:hover {
+	color: #ffc32d;
+}
+
+td:last-child, td:last-child button {
+	color: #6666;
+}
+
+	td:last-child button:hover {
+		color: white;
+	}
