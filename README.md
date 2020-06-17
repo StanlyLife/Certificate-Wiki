@@ -8,7 +8,6 @@ This project is a remake of [certify](https://github.com/StanlyLife/Certify) and
   <summary>About</summary>
   
    ### WIP
-    [![8033481c72fb7465ca1de6041734ca00.png](https://s7.gifyu.com/images/8033481c72fb7465ca1de6041734ca00.png)](https://gifyu.com/image/u81s)
     
 </details>
 
@@ -39,3 +38,6 @@ This project is a remake of [certify](https://github.com/StanlyLife/Certify) and
   ### WIP
   
 </details>
+
+
+[![8033481c72fb7465ca1de6041734ca00.png](https://s7.gifyu.com/images/8033481c72fb7465ca1de6041734ca00.png)](https://gifyu.com/image/u81s)
