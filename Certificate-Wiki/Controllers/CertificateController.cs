@@ -57,11 +57,17 @@ namespace Certificate_Wiki.Controllers {
 
 		[Authorize]
 		[HttpGet]
-		public async Task<IActionResult> UserAsync(CertificateViewModel model) {
-			CertificateViewModel certificates = new CertificateViewModel();
+		public async Task<IActionResult> UserAsync() {
 			CertificateUser user = await userManager.FindByNameAsync(User.Identity.Name);
-			certificates.certificateList = CertificateHandler.GetByUserId(user.Id);
-			return View(certificates);
+			FavoriteAndCertificateModel viewModel = new FavoriteAndCertificateModel {
+				certificate = CertificateHandler.GetByUserId(user.Id)
+			};
+			foreach (var cert in viewModel.certificate.ToList()) {
+				bool isFavorite = favoriteHandler.CheckUserFavortite(user.Id, cert.CertificateId);
+				viewModel.isFavorite.Add(isFavorite);
+			}
+
+			return View(viewModel);
 		}
 
 		[Authorize]
