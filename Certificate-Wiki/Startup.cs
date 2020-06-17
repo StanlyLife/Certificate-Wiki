@@ -31,6 +31,7 @@ namespace Certificate_Wiki {
 		public void ConfigureServices(IServiceCollection services) {
 			services.AddScoped<ICertificateHandler, CertificateHandler>();
 			services.AddScoped<IFavoriteHandler, FavoriteHandler>();
+			services.AddScoped<IUserSearch, UserSearch>();
 			services.AddControllersWithViews();
 
 			services.AddRazorPages()
