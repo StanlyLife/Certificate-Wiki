@@ -12,6 +12,7 @@ namespace Certificate_Wiki.Models.Search {
 		public string search { get; set; }
 
 		public IEnumerable<Certificates> certificatesResult { get; set; }
+		public IEnumerable<CertificateUser> certificateUsers { get; set; }
 
 		public int resultPages { get; set; }
 	}
