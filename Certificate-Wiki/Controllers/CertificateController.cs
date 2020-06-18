@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace Certificate_Wiki.Controllers {
 
@@ -18,11 +19,16 @@ namespace Certificate_Wiki.Controllers {
 		private ICertificateHandler CertificateHandler;
 		private readonly UserManager<CertificateUser> userManager;
 		private readonly IFavoriteHandler favoriteHandler;
+		private readonly SignInManager<CertificateUser> signInManager;
 
-		public CertificateController(ICertificateHandler certificateHandler, UserManager<CertificateUser> userManager, IFavoriteHandler favoriteHandler) {
+		public CertificateController(ICertificateHandler certificateHandler,
+			UserManager<CertificateUser> userManager,
+			IFavoriteHandler favoriteHandler,
+			SignInManager<CertificateUser> signInManager) {
 			this.CertificateHandler = certificateHandler;
 			this.userManager = userManager;
 			this.favoriteHandler = favoriteHandler;
+			this.signInManager = signInManager;
 		}
 
 		[HttpGet]
@@ -30,6 +36,7 @@ namespace Certificate_Wiki.Controllers {
 		public async Task<IActionResult> IndexAsync(int id) {
 			var model = new CertificateIndex { IsOwner = false };
 			var certificate = CertificateHandler.GetById(id);
+			ViewBag.story = JsonConvert.SerializeObject(new String(""));
 
 			if (certificate == null) { return RedirectToAction("Index", "Home"); }
 			model.Certificate = certificate;
@@ -39,8 +46,16 @@ namespace Certificate_Wiki.Controllers {
 			if (model.CertificateOwner.UserName == User.Identity.Name) { model.IsOwner = true; }
 
 			if (model.Certificate.CertificateFile != null) {
-				model.CertificateUrl = GetImageUrl(model.Certificate);
-				model.CertificateFile = null;
+				if (certificate.CertificateFileName.ToString().ToLower().EndsWith(".pdf")) {
+					string imageDataBytes = Convert.ToBase64String(model.Certificate.CertificateFile);
+					ViewBag.story = JsonConvert.SerializeObject(imageDataBytes);
+				} else {
+					model.CertificateUrl = GetImageUrl(model.Certificate);
+					model.CertificateFile = null;
+					Console.WriteLine("does not end with .pdf:{0}", certificate.CertificateFileName);
+				}
+			} else {
+				model.CertificateUrl = certificate.CertificateUrl;
 			}
 
 			model.IsPrivate = model.CertificateOwner.isPrivate;
@@ -59,6 +74,11 @@ namespace Certificate_Wiki.Controllers {
 		[HttpGet]
 		public async Task<IActionResult> UserAsync() {
 			CertificateUser user = await userManager.FindByNameAsync(User.Identity.Name);
+			//
+			//	when database is reset the user may still be logged in
+			//	If user tries to enter a restricted page, he or she will be
+			//	signed out
+			if (user == null) { return RedirectToAction("logout", "auth"); }
 			FavoriteAndCertificateModel viewModel = new FavoriteAndCertificateModel {
 				certificate = CertificateHandler.GetByUserId(user.Id)
 			};
@@ -103,6 +123,7 @@ namespace Certificate_Wiki.Controllers {
 				//file upload
 				model.CertificateUrl = null;
 				model.CertificateFile = FileToBytes(file);
+				model.CertificateFileName = file.FileName;
 			} else if (model.CertificateUrl != null) {
 				//url upload
 				model.CertificateFile = null;

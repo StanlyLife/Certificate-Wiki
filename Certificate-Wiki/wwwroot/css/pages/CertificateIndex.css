@@ -83,7 +83,7 @@
 			font-weight: 600;
 		}
 
-.certificate img {
+.certificate img, .certificate canvas {
 	width: 100%;
 }
 
