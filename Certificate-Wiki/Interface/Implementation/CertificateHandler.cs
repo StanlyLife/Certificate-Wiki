@@ -19,22 +19,22 @@ namespace Certificate_Wiki.Interface.Implementation {
 		}
 
 		public Certificates Create(Certificates certificate) {
-			db.CertificateContext.Add(certificate);
+			db.Certificates.Add(certificate);
 			SaveChanges();
 			return certificate;
 		}
 
 		public bool Delete(int id) {
-			var status = db.CertificateContext.Remove(GetById(id));
+			var status = db.Certificates.Remove(GetById(id));
 			return SaveChanges();
 		}
 
 		public int GetAmountOfCertificates() {
-			return db.CertificateContext.Where(certificate => certificate.UserFk != null).Count();
+			return db.Certificates.Where(certificate => certificate.UserFk != null).Count();
 		}
 
 		public async Task<CertificateUser> GetAuthorByIdAsync(int id) {
-			var query = from entity in db.CertificateContext
+			var query = from entity in db.Certificates
 						where entity.CertificateId == id
 						select entity.UserFk;
 
@@ -45,11 +45,11 @@ namespace Certificate_Wiki.Interface.Implementation {
 		}
 
 		public Certificates GetById(int id) {
-			return db.CertificateContext.Find(id);
+			return db.Certificates.Find(id);
 		}
 
 		public IEnumerable<Certificates> GetByUserId(string id) {
-			var query = from entity in db.CertificateContext
+			var query = from entity in db.Certificates
 						where entity.UserFk.Equals(id)
 						orderby entity.CertificateId
 						select entity;
@@ -57,7 +57,7 @@ namespace Certificate_Wiki.Interface.Implementation {
 		}
 
 		public IEnumerable<Certificates> GetCertificatesPages(int amountPerPage, int pageNumber) {
-			var query = from entity in db.CertificateContext
+			var query = from entity in db.Certificates
 						where entity != null
 						orderby entity.CertificateId
 						select entity;
@@ -69,7 +69,7 @@ namespace Certificate_Wiki.Interface.Implementation {
 		}
 
 		public IEnumerable<Certificates> GetCertificatesPages(int amountPerPage, int pageNumber, string search) {
-			var query = from entity in db.CertificateContext
+			var query = from entity in db.Certificates
 						where entity.CertificateName.Contains(search)
 						orderby entity.CertificateName
 						select entity;
@@ -80,7 +80,7 @@ namespace Certificate_Wiki.Interface.Implementation {
 		}
 
 		public int GetCertificatesPagesResultAmount(string search) {
-			var query = from entity in db.CertificateContext
+			var query = from entity in db.Certificates
 						where entity.CertificateName.Contains(search)
 						orderby entity.CertificateName
 						select entity;
@@ -88,7 +88,7 @@ namespace Certificate_Wiki.Interface.Implementation {
 		}
 
 		public int GetCertificatesPagesResultAmount() {
-			var query = from entity in db.CertificateContext
+			var query = from entity in db.Certificates
 						where entity != null
 						orderby entity.CertificateId
 						select entity;
@@ -101,7 +101,7 @@ namespace Certificate_Wiki.Interface.Implementation {
 		}
 
 		public Certificates Update(Certificates certificate) {
-			var entity = db.CertificateContext.Attach(certificate);
+			var entity = db.Certificates.Attach(certificate);
 			entity.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
 			SaveChanges();
 
