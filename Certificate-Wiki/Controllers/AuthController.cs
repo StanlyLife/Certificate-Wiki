@@ -83,14 +83,14 @@ namespace Certificate_Wiki.Controllers {
 				Console.WriteLine("modelstate failed"); //Remove
 				return View(model);
 			}
-
 			var user = await userManager.FindByEmailAsync(model.Email);
 			if (user != null) { ModelState.AddModelError("Email", "User Already exists"); return View(model); }
 
 			//Register user
 			user = new CertificateUser {
 				Id = Guid.NewGuid().ToString(),
-				UserName = model.Email, /*Username cannot be null in Identity*/
+				UserName = userManager.NormalizeEmail(model.Email), /*Username cannot be null in Identity*/
+				NormalizedEmail = userManager.NormalizeEmail(model.Email), /*Username cannot be null in Identity*/
 				Email = model.Email
 			};
 
@@ -103,14 +103,16 @@ namespace Certificate_Wiki.Controllers {
 			}
 
 			Console.WriteLine("registered!");
-			return View();
+			return RedirectToAction("login");
+			//TODO
 			//Email confirmation
-
 			//Send link to email
 		}
 
 		[Route("Forgotpassword")]
 		public IActionResult forgotpassword() {
+			//TODO
+			//implement
 			return View();
 		}
 
