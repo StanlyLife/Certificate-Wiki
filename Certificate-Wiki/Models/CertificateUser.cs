@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Certificate_Wiki.Models {
 
@@ -10,7 +11,10 @@ namespace Certificate_Wiki.Models {
 		public string Occupation { get; set; }
 		public string Country { get; set; }
 		public string Description { get; set; }
+
+		[NotMapped]
 		public String ProfilePictureUrl { get; set; }
+
 		public Byte[] ProfilePicture { get; set; }
 		public bool isPrivate { get; set; }
 	}
