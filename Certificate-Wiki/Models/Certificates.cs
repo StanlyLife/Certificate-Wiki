@@ -24,6 +24,8 @@ namespace Certificate_Wiki.Models {
 		//File OR Url
 		public byte[] CertificateFile { get; set; }
 
+		public string CertificateFileName { get; set; }
+
 		public string CertificateUrl { get; set; }
 	}
 }
