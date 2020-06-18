@@ -15,15 +15,18 @@ namespace Certificate_Wiki.Controllers {
 		private readonly UserManager<CertificateUser> userManager;
 		private readonly SignInManager<CertificateUser> signInManager;
 		private readonly ICertificateHandler certificateHandler;
+		private readonly IFavoriteHandler favoriteHandler;
 
 		public ProfileController(
 			UserManager<CertificateUser> userManager,
 			SignInManager<CertificateUser> signInManager,
-			ICertificateHandler certificateHandler
+			ICertificateHandler certificateHandler,
+			IFavoriteHandler favoriteHandler
 			) {
 			this.userManager = userManager;
 			this.signInManager = signInManager;
 			this.certificateHandler = certificateHandler;
+			this.favoriteHandler = favoriteHandler;
 		}
 
 		[Route("Profile/User/{userId}")]
@@ -35,7 +38,12 @@ namespace Certificate_Wiki.Controllers {
 			if (viewModel.profile == null) { return View(new ProfileModel()); }
 
 			viewModel.facm.certificate = certificateHandler.GetByUserId(viewModel.profile.Id);
-			if(viewModel.profile.ProfilePicture == null) {
+			foreach (var cert in viewModel.facm.certificate.ToList()) {
+				bool isFavorite = favoriteHandler.CheckUserFavortite(userId, cert.CertificateId);
+				viewModel.facm.isFavorite.Add(isFavorite);
+			}
+
+			if (viewModel.profile.ProfilePicture == null) {
 				return View(viewModel);
 			}
 			viewModel.profilePicture = GetImageUrl(viewModel.profile);
