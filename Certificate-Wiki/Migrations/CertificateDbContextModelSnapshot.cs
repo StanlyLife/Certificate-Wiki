@@ -142,6 +142,9 @@ namespace Certificate_Wiki.Migrations
                     b.Property<byte[]>("CertificateFile")
                         .HasColumnType("varbinary(max)");
 
+                    b.Property<string>("CertificateFileName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("CertificateName")
                         .HasColumnType("nvarchar(max)");
 
@@ -159,7 +162,7 @@ namespace Certificate_Wiki.Migrations
 
                     b.HasKey("CertificateId");
 
-                    b.ToTable("CertificateContext");
+                    b.ToTable("Certificates");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

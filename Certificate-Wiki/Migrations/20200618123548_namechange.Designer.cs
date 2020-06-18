@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Certificate_Wiki.Migrations
 {
     [DbContext(typeof(CertificateDbContext))]
-    [Migration("20200613213219_favorite")]
-    partial class favorite
+    [Migration("20200618123548_namechange")]
+    partial class namechange
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -144,6 +144,9 @@ namespace Certificate_Wiki.Migrations
                     b.Property<byte[]>("CertificateFile")
                         .HasColumnType("varbinary(max)");
 
+                    b.Property<string>("CertificateFileName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("CertificateName")
                         .HasColumnType("nvarchar(max)");
 
@@ -161,7 +164,7 @@ namespace Certificate_Wiki.Migrations
 
                     b.HasKey("CertificateId");
 
-                    b.ToTable("CertificateContext");
+                    b.ToTable("Certificates");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
