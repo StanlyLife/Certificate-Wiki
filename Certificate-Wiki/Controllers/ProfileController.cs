@@ -35,6 +35,9 @@ namespace Certificate_Wiki.Controllers {
 			if (viewModel.profile == null) { return View(new ProfileModel()); }
 
 			viewModel.facm.certificate = certificateHandler.GetByUserId(viewModel.profile.Id);
+			if(viewModel.profile.ProfilePicture == null) {
+				return View(viewModel);
+			}
 			viewModel.profilePicture = GetImageUrl(viewModel.profile);
 			return View(viewModel);
 		}
