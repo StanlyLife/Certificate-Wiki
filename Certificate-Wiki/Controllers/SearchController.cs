@@ -27,11 +27,12 @@ namespace Certificate_Wiki.Controllers {
 
 		//TODO
 		//Fix url search bug
-		private int resultsPerPage = 2;
+		private int resultsPerPage = 20;
 
 		[Route("Search/{page:int?}/{search?}")]
 		public IActionResult Index(string search, int? page) {
 			SearchModel searchModel = new SearchModel { search = search };
+			if(page.HasValue) { searchModel.page = page.Value; }
 			if (String.IsNullOrWhiteSpace(search)) {
 				searchModel = SearchDefaultResult(searchModel, page);
 				return View(searchModel);
