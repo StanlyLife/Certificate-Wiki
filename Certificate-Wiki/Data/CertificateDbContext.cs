@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace Certificate_Wiki.Data {
 
 	public class CertificateDbContext : IdentityDbContext<CertificateUser> {
-		public DbSet<Certificates> CertificateContext { get; set; }
+		public DbSet<Certificates> Certificates { get; set; }
 		public DbSet<FavoriteCertificate> FavoriteCertificates { get; set; }
 
 		public CertificateDbContext(DbContextOptions<CertificateDbContext> options) : base(options) {
