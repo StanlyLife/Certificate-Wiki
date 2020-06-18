@@ -183,3 +183,29 @@ hr {
 footer {
 	display: none;
 }
+
+table td i {
+	font-size: 1.25rem;
+	transition: color .25s ease-out;
+	color: var(--color-text);
+	cursor: pointer;
+}
+
+	table td i:hover {
+		color: white;
+	}
+
+.table-favorite tr td:first-child i {
+	color: goldenrod;
+	cursor: default;
+}
+
+.table-favorite tr td:first-child {
+	display: flex;
+}
+
+
+#featured-certificates {
+	border-bottom: 2px solid var(--color-light);
+	padding: .25rem 0;
+}

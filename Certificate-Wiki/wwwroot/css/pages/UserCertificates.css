@@ -6,26 +6,22 @@
 	margin: 0 auto;
 }
 
-.profile {
-	margin: 5vh auto;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+
+.profile img {
+	max-height: 20vh;
+	border-radius: 500px;
+	border: .25rem solid var(--color-text);
+	background: var(--color-text);
 }
 
-	.profile img {
-		max-height: 10vh;
-		border-radius: 500px;
-	}
-
-	.profile h1 {
-		padding: 1rem;
-		font-family: var(--font-header);
-	}
+.profile h1 {
+	padding: 1rem;
+	font-family: var(--font-header);
+}
 
 
 .user-certificates {
-	margin: 5vh 0;
+	margin: 0 0 5vh 0;
 }
 
 tr {
@@ -174,3 +170,47 @@ td:last-child, td:last-child button {
 	td:last-child button:hover {
 		color: white;
 	}
+
+
+.profile {
+	background: var(--color-light);
+	border-bottom: .5rem solid var(--color-text);
+	width: 75vw;
+	margin: 1vh auto;
+	padding: .5rem 0;
+	color: #666;
+	cursor: pointer;
+}
+
+	.profile:hover {
+		opacity: .75;
+	}
+
+
+	.profile a {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: row;
+	}
+
+
+.profile-info {
+	display: flex;
+	font-size: .5rem;
+	flex-direction: column;
+}
+
+	.profile-info h1 {
+		display: flex;
+		flex-direction: column;
+		text-align: center;
+	}
+
+
+		.profile-info h1:first-child {
+			text-transform: capitalize;
+			font-size: 1.5rem;
+			flex-direction: row;
+			justify-content: center;
+		}

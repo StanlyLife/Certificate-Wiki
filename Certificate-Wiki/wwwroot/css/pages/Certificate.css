@@ -164,3 +164,6 @@
 .light-label {
 	color: var(--color-light) !important;
 }
+.input-border {
+	border-bottom: 5px solid indianred !important;
+}
