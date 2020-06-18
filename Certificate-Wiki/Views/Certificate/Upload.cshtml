@@ -18,19 +18,19 @@
 
 				<div class="form-row">
 					<label>Certificate name</label>
-					<input type="text" asp-for="CertificateName" />
+					<input class="text-input" type="text" asp-for="CertificateName" />
 				</div>
 				<div class="form-row">
 					<label>Subject</label>
-					<input type="text" asp-for="Subject" />
+					<input class="text-input" type="text" asp-for="Subject" />
 				</div>
 				<div class="form-row">
 					<label>Admissioner</label>
-					<input type="text" asp-for="Admissioner" />
+					<input class="text-input" type="text" asp-for="Admissioner" />
 				</div>
 				<div class="form-row">
 					<label>Description</label>
-					<textarea type="text" asp-for="Description"></textarea>
+					<textarea class="text-input" type="text" asp-for="Description"></textarea>
 				</div>
 				<div class="form-row certificate">
 					<label class="light-label">How do you want to upload your certificate?</label>
@@ -51,7 +51,7 @@
 							<input type="radio" value="url" name="certificate-type" id="url" />
 						</div>
 						<div class="certificate-file url-upload">
-							<input type="url" asp-for="CertificateUrl" />
+							<input class="text-input" type="url" asp-for="CertificateUrl" />
 						</div>
 					</div>
 				</div>
@@ -68,3 +68,4 @@
 	</div>
 </div>
 <script src="~/js/Certificate.js"></script>
+<script src="~/js/FormInputs.js"></script>

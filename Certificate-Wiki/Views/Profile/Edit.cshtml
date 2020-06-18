@@ -1,103 +1,100 @@
 ﻿@{
-    ViewData["Title"] = "Edit Profile";
+	ViewData["Title"] = "Edit Profile";
 }
 @inject Microsoft.AspNetCore.Identity.UserManager<CertificateUser> userManager
 @model Certificate_Wiki.Models.CertificateUser
 
 @{
 
-    var user = await userManager.FindByNameAsync(User.Identity.Name);
+	var user = await userManager.FindByNameAsync(User.Identity.Name);
 }
 
 <link rel="stylesheet" href="~/css/pages/ProfileEdit.css" media="all" />
 
 <div class="background"></div>
 <div class="content">
-    <div class="content-image">
-        <img src="~/images/profile/Component 1 – 1.png" alt="" />
+	<div class="content-image">
+		<img src="~/images/profile/Component 1 – 1.png" alt="" />
 
-    </div>
-    <div class="content-profile">
-        <div class="profile-image">
-            @if (user.ProfilePicture != null && !String.IsNullOrWhiteSpace(Convert.ToBase64String(user.ProfilePicture)))
-            {
-                <img src="@string.Format("data:image/png;base64,{0}", Convert.ToBase64String(user.ProfilePicture))" alt="Profile image" id="profile-image" />
-            }
-            else
-            {
-                <img src="https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png" alt="error loading image" id="profile-image" /> 
-            }
+	</div>
+	<div class="content-profile">
+		<div class="profile-image">
+			@if (user.ProfilePicture != null && !String.IsNullOrWhiteSpace(Convert.ToBase64String(user.ProfilePicture))) {
+				<img src="@string.Format("data:image/png;base64,{0}", Convert.ToBase64String(user.ProfilePicture))" alt="Profile image" id="profile-image" />
+			} else {
+				<img src="https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png" alt="error loading image" id="profile-image" />
+			}
 
-        </div>
-        <div class="profile-form">
-            <h2>@User.Identity.Name</h2>
-            <div asp-validation-summary="All">
-            </div>
-            <form asp-action="Edit" method="post">
+		</div>
+		<div class="profile-form">
+			<h2>@User.Identity.Name</h2>
+			<div asp-validation-summary="All">
+			</div>
+			<form asp-action="Edit" method="post">
 
-                <div class="form-row">
-                    <label>First Name</label>
-                    <input asp-for="FirstName" type="text" />
-                </div>
-                <div class="form-row">
-                    <label>Last Name</label>
-                    <input asp-for="LastName" type="text" />
-                </div>
-                <div class="form-row">
-                    <label>Occupation</label>
-                    <input asp-for="Occupation" type="text" />
-                </div>
-                <div class="form-row">
-                    <label>Website</label>
-                    <input asp-for="Website" type="url" />
-                </div>
-                <div class="form-row">
-                    <label>Country</label>
-                    <input asp-for="Country" type="text" />
-                </div>
-                <div class="form-row">
-                    <label>Profile Description</label>
-                    <textarea asp-for="Description" type="text"></textarea>
-                </div>
-                <div class="form-row">
-                    <label>Private Profile</label>
-                    @Html.CheckBoxFor(x => x.isPrivate)
-                </div>
+				<div class="form-row">
+					<label>First Name</label>
+					<input class="text-input" asp-for="FirstName" type="text" />
+				</div>
+				<div class="form-row">
+					<label>Last Name</label>
+					<input class="text-input" asp-for="LastName" type="text" />
+				</div>
+				<div class="form-row">
+					<label>Occupation</label>
+					<input class="text-input" asp-for="Occupation" type="text" />
+				</div>
+				<div class="form-row">
+					<label>Website</label>
+					<input class="text-input" asp-for="Website" type="url" />
+				</div>
+				<div class="form-row">
+					<label>Country</label>
+					<input class="text-input" asp-for="Country" type="text" />
+				</div>
+				<div class="form-row">
+					<label>Profile Description</label>
+					<textarea class="text-input" asp-for="Description" type="text"></textarea>
+				</div>
+				<div class="form-row">
+					<label>Private Profile</label>
+					@Html.CheckBoxFor(x => x.isPrivate)
+				</div>
 
-                <input type="hidden" name="cropped" id="cropped">
+				<input type="hidden" name="cropped" id="cropped">
 
-                <div class="form-row">
-                    <button type="submit">Save</button>
-                </div>
-            </form>
-            <form class="delete-form" asp-action="DeleteAccount">
-                <div class="form-row">
-                    <button class="delete-btn" type="button">Delete account</button>
-                    <button class="delete-btn delete-confirm" type="submit">Yes delete</button>
-                </div>
-            </form>
-        </div>
-    </div>
+				<div class="form-row">
+					<button type="submit">Save</button>
+				</div>
+			</form>
+			<form class="delete-form" asp-action="DeleteAccount">
+				<div class="form-row">
+					<button class="delete-btn" type="button">Delete account</button>
+					<button class="delete-btn delete-confirm" type="submit">Yes delete</button>
+				</div>
+			</form>
+		</div>
+	</div>
 
-    <!-- The Modal -->
-    <div id="myModal" class="modal">
+	<!-- The Modal -->
+	<div id="myModal" class="modal">
 
-        <!-- Modal content -->
-        <div class="modal-content">
-            <div class="modal-header">
-                <span class="close">&times;</span>
-                <h1>Edit profile picture</h1>
-            </div>
-            <div class="modal-body" style="display: none;">
-                <div id="myImg"></div>
-            </div>
-            <div class="modal-footer">
-                <button id="changeImageButton">Change image</button>
-                <input type="file" style="display: none;" id="changeImage" />
-                <button type="button" style="display: none;" id="saveImage">Save changes</button>
-            </div>
-        </div>
-    </div>
+		<!-- Modal content -->
+		<div class="modal-content">
+			<div class="modal-header">
+				<span class="close">&times;</span>
+				<h1>Edit profile picture</h1>
+			</div>
+			<div class="modal-body" style="display: none;">
+				<div id="myImg"></div>
+			</div>
+			<div class="modal-footer">
+				<button id="changeImageButton">Change image</button>
+				<input type="file" style="display: none;" id="changeImage" />
+				<button type="button" style="display: none;" id="saveImage">Save changes</button>
+			</div>
+		</div>
+	</div>
 
 </div>
 
@@ -106,62 +103,64 @@
 
 <script src="~/js/DeleteBtn.js"></script>
 <script>
-    var modal = document.getElementById("myModal");
-    window.onclick = function (event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-    var span = document.getElementsByClassName("close")[0];
-    span.onclick = function () {
-        modal.style.display = "none";
-    }
+	var modal = document.getElementById("myModal");
+	window.onclick = function (event) {
+		if (event.target == modal) {
+			modal.style.display = "none";
+		}
+	}
+	var span = document.getElementsByClassName("close")[0];
+	span.onclick = function () {
+		modal.style.display = "none";
+	}
 
-    var profileButton = $("#profile-image");
-    profileButton.on("click", function () {
-        modal.style.display = "block";
-        $uploadCrop.croppie('bind');
-        
-    });
+	var profileButton = $("#profile-image");
+	profileButton.on("click", function () {
+		modal.style.display = "block";
+		$uploadCrop.croppie('bind');
 
-    $uploadCrop = $('#myImg').croppie({
-        enableExif: true,
-        viewport: {
-            width: 300,
-            height: 300,
-            type: 'circle'
-        },
-        boundary: {
-            width: 500,
-            height: 500
-        },
-        //blank image for now, in case
-        url: "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
-    });
+	});
 
-    window.addEventListener('load', function () {
-        $('#changeImage').on('change', function () {
-            if (this.files && this.files[0]) {
-                $(".modal-body").css("display", "block ");
-                $("#saveImage").css("display", "block ");
-                $uploadCrop.croppie('bind', {
-                    url: URL.createObjectURL(this.files[0])
-                });
-            }
-        });
-    });
+	$uploadCrop = $('#myImg').croppie({
+		enableExif: true,
+		viewport: {
+			width: 300,
+			height: 300,
+			type: 'circle'
+		},
+		boundary: {
+			width: 500,
+			height: 500
+		},
+		//blank image for now, in case
+		url: "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+	});
 
-    $("#saveImage").on("click", function () {
-        $uploadCrop.croppie("result", "base64").then(function (base64) {
-            $('#cropped').val(base64);
-            $("#profile-image").attr("src", base64);
-        });
+	window.addEventListener('load', function () {
+		$('#changeImage').on('change', function () {
+			if (this.files && this.files[0]) {
+				$(".modal-body").css("display", "block ");
+				$("#saveImage").css("display", "block ");
+				$uploadCrop.croppie('bind', {
+					url: URL.createObjectURL(this.files[0])
+				});
+			}
+		});
+	});
 
-        modal.style.display = "none";
-    });
+	$("#saveImage").on("click", function () {
+		$uploadCrop.croppie("result", "base64").then(function (base64) {
+			$('#cropped').val(base64);
+			$("#profile-image").attr("src", base64);
+		});
 
-    $("#changeImageButton").on("click", function () {
-        $("#changeImage").focus().trigger("click");
-    });
+		modal.style.display = "none";
+	});
+
+	$("#changeImageButton").on("click", function () {
+		$("#changeImage").focus().trigger("click");
+	});
 
 </script>
+
+<script src="~/js/FormInputs.js"></script>

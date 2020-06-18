@@ -105,3 +105,7 @@ main {
 .content-form a:hover {
   color: #333;
 }
+
+.input-border {
+  border-bottom: 5px solid indianred !important;
+}

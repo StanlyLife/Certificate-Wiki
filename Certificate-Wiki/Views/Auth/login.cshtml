@@ -25,13 +25,15 @@
 		<div asp-validation-summary="All"></div>
 		<form asp-action="Login" method="post">
 			<div class="form-row">
-				<input asp-for="Email" type="text" placeholder="Email" />
+				<input class="text-input" asp-for="Email" type="text" placeholder="Email" />
 			</div>
 			<div class="form-row">
-				<input asp-for="Password" type="password" placeholder="password" />
+				<input class="text-input" asp-for="Password" type="password" placeholder="password" />
 			</div>
 			<button>Log in</button>
 		</form>
 		<a asp-action="forgotpassword">Forgot password</a>
 		<a asp-action="register">Register new user</a>
 	</div>
+
+	<script src="~/js/FormInputs.js"></script>
