@@ -62,7 +62,11 @@ namespace Certificate_Wiki {
 				options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(1);
 			}).AddEntityFrameworkStores<CertificateDbContext>().AddDefaultTokenProviders();
 
-			services.ConfigureApplicationCookie(options => options.LoginPath = "/Auth/login");
+			services.ConfigureApplicationCookie(options => {
+				options.LoginPath = "/login";
+				options.ReturnUrlParameter = "";
+				options.AccessDeniedPath = "/404";
+				});
 		}
 
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env) {
