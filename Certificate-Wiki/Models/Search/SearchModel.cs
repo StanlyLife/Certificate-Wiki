@@ -8,6 +8,10 @@ namespace Certificate_Wiki.Models.Search {
 
 	public class SearchModel {
 
+		public SearchModel() {
+			page = 1;
+		}
+
 		[BindProperty(SupportsGet = true)]
 		public string search { get; set; }
 
@@ -15,5 +19,6 @@ namespace Certificate_Wiki.Models.Search {
 		public IEnumerable<CertificateUser> certificateUsers { get; set; }
 
 		public int resultPages { get; set; }
+		public int page { get; set; }
 	}
 }

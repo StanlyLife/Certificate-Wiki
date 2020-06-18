@@ -3,7 +3,7 @@
 }
 @model Certificate_Wiki.Models.Search.SearchModel
 <link rel="stylesheet" href="~/css/pages/search.css" media="all" />
-
+<script src="https://kit.fontawesome.com/f3cae94d9e.js" crossorigin="anonymous"></script>
 <div class="background"></div>
 <div class="content">
 	<div class="search-header">
@@ -21,20 +21,20 @@
 	</div>
 	<div class="table-wrapper">
 		<table>
-			<thead>
-				<tr>
-					<th>Certificate</th>
-					<th>Description</th>
-					<th>Subject</th>
-					<th>Site</th>
-					<th>Author</th>
-					<th>View</th>
-				</tr>
-			</thead>
-			<tbody>
-				@if (Model.certificateUsers == null && Model.certificatesResult.ToList().Count() > 0) {
+			@if (Model.certificateUsers == null && Model.certificatesResult.ToList().Count() > 0) {
+				<thead>
+					<tr>
+						<th>Certificate</th>
+						<th>Description</th>
+						<th>Subject</th>
+						<th>Site</th>
+						<th>View</th>
+					</tr>
+				</thead>
+				@*<tbody>*@
 
-					@foreach (var certificate in Model.certificatesResult.ToList()) {
+				@foreach (var certificate in Model.certificatesResult.ToList()) {
+					<tbody>
 
 						<tr>
 							<td>@certificate.CertificateName</td>
@@ -43,15 +43,23 @@
 							</td>
 							<td>@certificate.Subject</td>
 							<td>@certificate.Admissioner</td>
-							<td>Certificate owner</td>
 							<td>
-								<a asp-action="Index" asp-controller="Certificate" asp-route-id="@certificate.CertificateId">
-									<img src="~/images/Search/Component 2 – 1.png" alt="Error loading image" />
+								<a asp-action="index" asp-controller="Certificate" asp-route-id="@certificate.CertificateId">
+									<i class="fas fa-play-circle"></i>
 								</a>
 							</td>
 						</tr>
-					}
-				} else if (Model.certificateUsers.ToList().Count() > 0) {
+					</tbody>
+
+				}
+			} else if (Model.certificateUsers != null && Model.certificateUsers.ToList().Count() > 0) {
+				<thead>
+					<tr>
+						<th>Email</th>
+						<th>View Profile</th>
+					</tr>
+				</thead>
+				<tbody>
 					@foreach (var user in Model.certificateUsers.ToList()) {
 						if (user.isPrivate) {
 							<tr>
@@ -59,29 +67,72 @@
 							</tr>
 						}
 						<tr>
-							<td>@user.Email</td>
+							<td class="email">@user.Email</td>
+							<td class="profile">
+								<a asp-action="Index" asp-controller="profile" asp-route-userId="@user.Id">
+									<i class="fas fa-user-circle"></i>
+								</a>
+							</td>
 						</tr>
 					}
-				} else {
+				</tbody>
+			} else {
+				<thead>
+					<tr>
+						<th>Certificate</th>
+						<th>Description</th>
+						<th>Subject</th>
+						<th>Site</th>
+						<th>View</th>
+					</tr>
+				</thead>
+				<tbody>
+
 					<tr>
 						<td>No certificates or users found</td>
 					</tr>
-				}
-			</tbody>
+				</tbody>
+			}
+			@*</tbody>*@
 		</table>
 	</div>
 	<div class="pages">
-		<a asp-action="Index" asp-route-page="1" asp-route-search="@Model.search">
-			1
-		</a>
-		<a asp-action="Index" asp-route-page="2" asp-route-search="@Model.search">
-			2
-		</a>
-		<a asp-action="Index" asp-route-page="3" asp-route-search="@Model.search">
-			3
-		</a>
-		<a asp-action="Index" asp-route-page="2" asp-route-search="@Model.search">
-			4
-		</a>
+		@if (Model.resultPages > 1) {
+			@if (Model.page - 1 >= 1) {
+						int previousPage = Model.page - 1;
+				<a asp-action="Index" asp-route-page="@previousPage" asp-route-search="@Model.search">
+					<i class="fas fa-chevron-left"></i>
+				</a>
+			} else {
+				<a class="deactivate">
+					<i class="fas fa-chevron-left"></i>
+				</a>
+			}
+			@for (int i = Model.page - 5; i <= Math.Min(Model.page + 5, Model.resultPages); i++) {
+				Console.WriteLine(Model.resultPages);
+				Console.WriteLine(Math.Min(Model.page + 5, Model.resultPages));
+				if (i > 0) {
+					if (i == Model.page) {
+						<a class="current-page" asp-action="Index" asp-route-page="@i" asp-route-search="@Model.search">
+							@i
+						</a>
+					} else {
+						<a asp-action="Index" asp-route-page="@i" asp-route-search="@Model.search">
+							@i
+						</a>
+					}
+				}
+			}
+			@if ((Model.page + 1) <= Model.resultPages) {
+				int nextPage = Model.page + 1;
+				<a asp-action="Index" asp-route-page="@nextPage" asp-route-search="@Model.search">
+					<i class="fas fa-chevron-right"></i>
+				</a>
+			} else {
+				<a class="deactivate">
+					<i class="fas fa-chevron-right"></i>
+				</a>
+			}
+		}
 	</div>
 </div>
