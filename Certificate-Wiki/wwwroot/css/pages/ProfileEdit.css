@@ -35,19 +35,22 @@
 	flex: 1;
 	margin: 0 auto;
 }
-	
+
 
 	.profile-image img {
+		border: .25rem solid var(--color-text);
+		background: var(--color-text);
 		max-height: 20vh;
 		border-radius: 500px;
 		width: auto;
 		flex: 1;
 	}
+
 		.profile-image img:hover {
 			opacity: 0.4;
 			filter: alpha(opacity=40);
 		}
-	
+
 
 .profile-form {
 	margin: 1rem;
@@ -153,7 +156,7 @@
 	background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
-	
+
 
 /* Modal Content */
 .modal-content {
@@ -166,18 +169,27 @@
 	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
 }
 
-	.modal-content button {
-		margin: 0 auto;
-		width: 40%;
-		padding: .5rem 1rem;
-		border: none;
-		border-radius: 8px;
-		font-family: var(--font-header);
-		font-weight: 700;
-		color: var(--color-text);
-		border: 2px solid transparent;
-		transition: background .25s ease-out, border .25s ease-out;
-	}
+.cr-boundary {
+	background: #fff;
+}
+
+.modal-body {
+	background: var(--color-light);
+}
+
+
+.modal-content button {
+	margin: 0 auto;
+	width: 40%;
+	padding: .5rem 1rem;
+	border: none;
+	border-radius: 8px;
+	font-family: var(--font-header);
+	font-weight: 700;
+	color: var(--color-text);
+	border: 2px solid transparent;
+	transition: background .25s ease-out, border .25s ease-out;
+}
 
 	.modal-content button:hover {
 		background: transparent;
