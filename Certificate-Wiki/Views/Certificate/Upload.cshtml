@@ -57,7 +57,11 @@
 				</div>
 
 				<div class="form-row">
+					@if(Model.CertificateId != 0) {
+					<button type="submit">Save changes</button>
+					}else {
 					<button type="submit">Upload</button>
+					}
 				</div>
 			</form>
 		</div>
