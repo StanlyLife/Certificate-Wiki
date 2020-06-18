@@ -7,8 +7,27 @@
 <div class="background"></div>
 <div class="content">
 	<div class="profile">
-		<img src="https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png" alt="" />
-		<h1>@User.Identity.Name</h1>
+		<a asp-controller="profile" asp-action="index" asp-route-userId="@Model.profile.Id">
+
+		<img src="@Model.ProfileImageUrl" alt="Error loading image" />
+		<div class="profile-info">
+
+		<h1>
+			@if (string.IsNullOrWhiteSpace(Model.profile.FirstName)) {
+				<span>
+					First name, Last name
+				</span>
+			} else {
+				<span>@Model.profile.FirstName @Model.profile.LastName</span>
+			}
+		</h1>
+		<h1>
+			<span>Amount of certificates</span>
+			<span id="certificate-amount">@Model.certificate.ToList().Count()</span>
+		</h1>
+		</div>
+
+		</a>
 	</div>
 	<div class="user-certificates">
 		<table>
@@ -60,7 +79,7 @@
 							<span class="certificate-star">
 								<form method="post" asp-action="Favorite" asp-route-id="@certificate.CertificateId">
 									<button class="trash-btn" type="submit">
-										@if (Model.isFavorite.ToList()[Model.counter]) {
+										@if (!Model.isFavorite.ToList()[Model.counter]) {
 											<i class="fa fa-star star"></i>
 										} else {
 											<i class="fa fa-star favorited"></i>
