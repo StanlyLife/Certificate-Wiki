@@ -12,6 +12,10 @@ namespace Certificate_Wiki.Models.Certificate {
 			isFavorite = new List<bool>();
 		}
 
+		public string ProfileImageUrl { get; set; }
+
+		public CertificateUser profile { get; set; }
+
 		public IEnumerable<Certificates> certificate { get; set; }
 
 		public List<bool> isFavorite { get; set; }
