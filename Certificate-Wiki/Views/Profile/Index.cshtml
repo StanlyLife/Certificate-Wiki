@@ -5,57 +5,54 @@
 @model Certificate_Wiki.Models.Certificate.ProfileModel
 
 <link rel="stylesheet" href="~/css/pages/viewprofile.css" media="all" />
-
+<script src="https://kit.fontawesome.com/f3cae94d9e.js" crossorigin="anonymous"></script>
 <div class="background"></div>
 @if (Model.profile == null || Model.profile.isPrivate) {
 
-	<div class="content">
-		<div class="header">
-			<div class="header-image">
-				<img src="~/images/profile/profile-picture/Icon with face-20.png" alt="error loading image" />
+<div class="content">
+	<div class="header">
+		<div class="header-image">
+			<img src="~/images/profile/profile-picture/Icon with face-20.png" alt="error loading image" />
+		</div>
+		<div class="header-info">
+			<div class="profile-info">
+				<div class="info-pane-one">
+					<h1>User Not Found</h1>
+					<h6>404</h6>
+				</div>
+				<div class="info-pane-two">
+					<ul>
+						<li>
+							<p>
+								occupation
+							</p>
+							<span>compiler</span>
+						</li>
+						<li>
+							<p>
+								website
+							</p>
+							<span><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">home</a></span>
+						</li>
+						<li>
+							<p>
+								country
+							</p>
+							<span>your computer</span>
+						</li>
+					</ul>
+				</div>
 			</div>
-			<div class="header-info">
-				<div class="profile-info">
-					<div class="info-pane-one">
-						<h1>User Not Found</h1>
-						<h6>404</h6>
-					</div>
-					<div class="info-pane-two">
-						<ul>
-							<li>
-								<p>
-									occupation
-								</p>
-								<span>compiler</span>
-							</li>
-							<li>
-								<p>
-									website
-								</p>
-								<span><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">home</a></span>
-							</li>
-							<li>
-								<p>
-									country
-								</p>
-								<span>your computer</span>
-							</li>
-						</ul>
-					</div>
-				</div>
-				<hr />
-				<div class="profile-description">
-					<p>
-						01100010 01100101 01100101 01110000 00100000 01100010 01101111 01110000 00100000 01100010 01100101 01100101 01110000 00100000 01100010 01100101 01100101 01110000 00100000 01100010 01101111 01110000 00100000 01100010 01101111 01110000 00100000 01100010 01100101 01100101 01110000 00100000 01100010 01100101 01100101 01110000 00100000 01100010 01101111 01110000 00100000 01100010 01100101 01100101 01110000 00100000 01100010 01100101 01100101 01110000 00100000 01100010 01101111 01110000 00100000 01100010 01101111 01110000 00100000 01100010 01100101 01100101 01110000 00100000 01100010 01100101 01100101 01110000 00100000 01100010 01101111 01110000 00100000 01100010 01100101 01100101 01110000 00100000 01100010 01100101 01100101 01110000 00100000 01100010 01101111 01110000 00100000 01100010 01101111 01110000 00100000 01100010 01100101 01100101 01110000 00100000 01100010 01100101 01100101 01110000 00100000 01100010 01101111 01110000 00100000 01100010 01100101 01100101 01110000 00100000 01100010 01100101 01100101 01110000 00100000 01100010 01101111 01110000 00100000 01100010 01101111 01110000 00100000 01100010 01100101 01100101 01110000 00100000 01100010 01100101 01100101 01110000 00100000 01100010 01101111 01110000 00100000 01100010 01100101 01100101 01110000 00100000 01100010 01100101 01100101 01110000 00100000 01100010 01101111 01110000 00100000 01100010 01101111 01110000 00100000 01100010 01100101 01100101 01110000 00100000 01100010 01100101 01100101 01110000 00100000 01100010 01101111 01110000 00100000 01100010 01100101 01100101 01110000 00100000 01100010 01100101 01100101 01110000 00100000 01100010 01101111 01110000 00100000 01100010 01101111 01110000 00100000 01100010 01100101 01100101 01110000 00100000
-					</p>
-				</div>
+			<hr />
+			<div class="profile-description">
+				<p>
+					01100010 01100101 01100101 01110000 00100000 01100010 01101111 01110000 00100000 01100010 01100101 01100101 01110000 00100000 01100010 01100101 01100101 01110000 00100000 01100010 01101111 01110000 00100000 01100010 01101111 01110000 00100000 01100010 01100101 01100101 01110000 00100000 01100010 01100101 01100101 01110000 00100000 01100010 01101111 01110000 00100000 01100010 01100101 01100101 01110000 00100000 01100010 01100101 01100101 01110000 00100000 01100010 01101111 01110000 00100000 01100010 01101111 01110000 00100000 01100010 01100101 01100101 01110000 00100000 01100010 01100101 01100101 01110000 00100000 01100010 01101111 01110000 00100000 01100010 01100101 01100101 01110000 00100000 01100010 01100101 01100101 01110000 00100000 01100010 01101111 01110000 00100000 01100010 01101111 01110000 00100000 01100010 01100101 01100101 01110000 00100000 01100010 01100101 01100101 01110000 00100000 01100010 01101111 01110000 00100000 01100010 01100101 01100101 01110000 00100000 01100010 01100101 01100101 01110000 00100000 01100010 01101111 01110000 00100000 01100010 01101111 01110000 00100000 01100010 01100101 01100101 01110000 00100000 01100010 01100101 01100101 01110000 00100000 01100010 01101111 01110000 00100000 01100010 01100101 01100101 01110000 00100000 01100010 01100101 01100101 01110000 00100000 01100010 01101111 01110000 00100000 01100010 01101111 01110000 00100000 01100010 01100101 01100101 01110000 00100000 01100010 01100101 01100101 01110000 00100000 01100010 01101111 01110000 00100000 01100010 01100101 01100101 01110000 00100000 01100010 01100101 01100101 01110000 00100000 01100010 01101111 01110000 00100000 01100010 01101111 01110000 00100000 01100010 01100101 01100101 01110000 00100000
+				</p>
 			</div>
 		</div>
-		<!---->
-		@* TODO
-			Display favorited certificates here
-		*@
-		<!---->
+	</div>
+
+
 		<table>
 			<thead>
 				<tr>
@@ -76,80 +73,135 @@
 		</table>
 	</div>
 } else {
-	<div class="content">
-		<div class="header">
-			<div class="header-image">
-				<img src="@Model.profilePicture" alt="error loading image" />
+<div class="content">
+	<div class="header">
+		<div class="header-image">
+			<img src="@Model.profilePicture" alt="error loading image" />
+		</div>
+		<div class="header-info">
+			<div class="profile-info">
+				<div class="info-pane-one">
+					<h1>@Model.profile.FirstName @Model.profile.LastName</h1>
+					<h6>@Model.profile.Email</h6>
+				</div>
+				<div class="info-pane-two">
+					<ul>
+						<li>
+							<p>
+								occupation
+							</p>
+							<span>@Model.profile.Occupation</span>
+						</li>
+						<li>
+							<p>
+								website
+							</p>
+							<span><a href="@Model.profile.Website">@Model.profile.Website</a></span>
+						</li>
+						<li>
+							<p>
+								country
+							</p>
+							<span>@Model.profile.Country</span>
+						</li>
+						<li>
+							<p>
+								certificates
+							</p>
+							<span>@Model.facm.certificate.ToList().Count()</span>
+						</li>
+					</ul>
+				</div>
 			</div>
-			<div class="header-info">
-				<div class="profile-info">
-					<div class="info-pane-one">
-						<h1>@Model.profile.FirstName @Model.profile.LastName</h1>
-						<h6>@Model.profile.Email</h6>
-					</div>
-					<div class="info-pane-two">
-						<ul>
-							<li>
-								<p>
-									occupation
-								</p>
-								<span>@Model.profile.Occupation</span>
-							</li>
-							<li>
-								<p>
-									website
-								</p>
-								<span><a href="@Model.profile.Website">@Model.profile.Website</a></span>
-							</li>
-							<li>
-								<p>
-									country
-								</p>
-								<span>@Model.profile.Country</span>
-							</li>
-						</ul>
-					</div>
-				</div>
-				<hr />
-				<div class="profile-description">
-					<p>
-						@Model.profile.Description
-					</p>
-				</div>
+			<hr />
+			<div class="profile-description">
+				<p>
+					@Model.profile.Description
+				</p>
 			</div>
 		</div>
-		<!---->
-		@* TODO
-			Display favorited certificates here
-		*@
-		<!---->
-		<table>
-			<thead>
-				<tr>
-					<th>Certificate</th>
-					<th>Description</th>
-					<th>Subject</th>
-					<th>Admissioner</th>
-					<th>View</th>
-				</tr>
-			</thead>
-			<tbody>
-				@if (Model.facm.certificate.ToList().Count() > 0) {
-					foreach (var cert in Model.facm.certificate) {
-						<tr>
-							<td>@cert.CertificateName</td>
-							<td>
-								@cert.Description
-							</td>
-							<td>@cert.Subject</td>
-							<td>@cert.Admissioner</td>
-							<td>
-								<img src="~/images/Search/Component 2 – 1.png" alt="Error loading image" />
-							</td>
-						</tr>
-					}
-				}
-			</tbody>
-		</table>
 	</div>
+	<!---->
+	@* TODO
+		Display favorited certificates here
+	*@
+	<!---->
+
+	@if (Model.facm.isFavorite.ToList().Contains(true)) {
+
+	<table class="table-favorite">
+		<thead>
+			<tr>
+				<th id="featured-certificates">
+					Featured certificates
+				</th>
+			</tr>
+			<tr>
+				<th>Certificate</th>
+				<th>Description</th>
+				<th>Subject</th>
+				<th>Admissioner</th>
+				<th>View</th>
+			</tr>
+		</thead>
+		<tbody>
+
+	@foreach (var certificate in Model.facm.certificate.ToList()) {
+		@if (Model.facm.isFavorite.ToList()[Model.facm.counter]) {
+			<tr>
+				<td>
+					<i class="fa fa-star star"></i>
+					<p>
+				@certificate.CertificateName
+					</p>
+				</td>
+				<td>
+					@certificate.Description
+				</td>
+				<td>@certificate.Subject</td>
+				<td>@certificate.Admissioner</td>
+				<td>
+					<a asp-action="index" asp-controller="Certificate" asp-route-id="@certificate.CertificateId">
+						<i class="fas fa-play-circle"></i>
+					</a>
+				</td>
+			</tr>
+		}
+		Model.facm.counter++;
+	}
+		</tbody>
+	</table>
+	}
+
+	<table>
+		<thead>
+			<tr>
+				<th>Certificate</th>
+				<th>Description</th>
+				<th>Subject</th>
+				<th>Admissioner</th>
+				<th>View</th>
+			</tr>
+		</thead>
+		<tbody>
+			@if (Model.facm.certificate.ToList().Count() > 0) {
+				foreach (var cert in Model.facm.certificate) {
+					<tr>
+						<td>@cert.CertificateName</td>
+						<td>
+							@cert.Description
+						</td>
+						<td>@cert.Subject</td>
+						<td>@cert.Admissioner</td>
+						<td>
+							<a asp-action="index" asp-controller="Certificate" asp-route-id="@cert.CertificateId">
+								<i class="fas fa-play-circle"></i>
+							</a>
+						</td>
+					</tr>
+				}
+			}
+		</tbody>
+	</table>
+</div>
 }
