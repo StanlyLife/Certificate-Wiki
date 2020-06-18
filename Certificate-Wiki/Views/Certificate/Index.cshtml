@@ -24,14 +24,11 @@
 </div>
 <div class="content">
 
-	@if (!Model.IsPrivate || Model.IsOwner) {
+	@if (!Model.IsPrivate) {
 		<div class="certificate">
 			<div class="certificate-image">
-				@if (Model.CertificateFile != null) {
-					<canvas></canvas>
-				} else {
-					<img src="@Model.CertificateUrl" alt="" />
-				}
+				<canvas class="certificate-pdf"></canvas>
+				<img class="certificate-img" src="@Model.CertificateUrl" alt="" />
 			</div>
 			<div class="certificate-info">
 				<div class="info-first">
@@ -40,17 +37,17 @@
 				</div>
 
 				<div class="info-second">
-
 					<p>
 						Owner
 						<span>
-							@Model.CertificateOwner.FirstName @Model.CertificateOwner.LastName
+							<a asp-controller="Profile" asp-action="Index" asp-route-userId="@Model.Certificate.UserFk">
+								@Model.CertificateOwner.FirstName @Model.CertificateOwner.LastName
+							</a>
 						</span>
 					</p>
 					<p>
 						Subject
 						<span>
-
 							@Model.Certificate.Subject
 						</span>
 					</p>
@@ -64,6 +61,8 @@
 			</div>
 		</div>
 	} else {
-
+		<div class="certificate">
+			<h1>The owner of this certificate has a private profile</h1>
+		</div>
 	}
 </div>
