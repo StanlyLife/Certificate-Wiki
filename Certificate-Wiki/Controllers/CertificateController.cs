@@ -50,9 +50,8 @@ namespace Certificate_Wiki.Controllers {
 					string imageDataBytes = Convert.ToBase64String(model.Certificate.CertificateFile);
 					ViewBag.story = JsonConvert.SerializeObject(imageDataBytes);
 				} else {
-					model.CertificateUrl = GetImageUrl(model.Certificate);
+					model.CertificateUrl = GetImageUrl(model.Certificate.CertificateFile);
 					model.CertificateFile = null;
-					Console.WriteLine("does not end with .pdf:{0}", certificate.CertificateFileName);
 				}
 			} else {
 				model.CertificateUrl = certificate.CertificateUrl;
@@ -80,11 +79,16 @@ namespace Certificate_Wiki.Controllers {
 			//	signed out
 			if (user == null) { return RedirectToAction("logout", "auth"); }
 			FavoriteAndCertificateModel viewModel = new FavoriteAndCertificateModel {
-				certificate = CertificateHandler.GetByUserId(user.Id)
+				certificate = CertificateHandler.GetByUserId(user.Id),
+				profile = await userManager.FindByEmailAsync(User.Identity.Name)
 			};
 			foreach (var cert in viewModel.certificate.ToList()) {
 				bool isFavorite = favoriteHandler.CheckUserFavortite(user.Id, cert.CertificateId);
 				viewModel.isFavorite.Add(isFavorite);
+			}
+
+			if (user.ProfilePicture != null) {
+				viewModel.ProfileImageUrl = GetImageUrl(user.ProfilePicture);
 			}
 
 			return View(viewModel);
@@ -204,8 +208,8 @@ namespace Certificate_Wiki.Controllers {
 			return false;
 		}
 
-		public string GetImageUrl(Certificates certificate) {
-			string imageDataBytes = Convert.ToBase64String(certificate.CertificateFile);
+		public string GetImageUrl(byte[] image) {
+			string imageDataBytes = Convert.ToBase64String(image);
 			string imageUrl = string.Format("data:/image/jpeg;base64,{0}", imageDataBytes);
 			return imageUrl;
 		}
