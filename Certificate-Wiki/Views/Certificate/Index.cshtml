@@ -10,7 +10,7 @@
 
 <div class="background"></div>
 <div class="search">
-	<form method="post">
+	<form method="get" asp-action="index" asp-controller="search">
 		<button type="submit">
 			<i class="fas fa-search"></i>
 		</button>
@@ -70,6 +70,7 @@
 </div>
 
 <script>
+	document.getElementById("pdf").style.display = "none";
 	var pdfData = atob('@Html.Raw(JsonConvert.DeserializeObject(ViewBag.story))');
 	// Loaded via <script> tag, create shortcut to access PDF.js exports.
 	var pdfjsLib = window['pdfjs-dist/build/pdf'];
@@ -98,7 +99,7 @@
 			var renderTask = page.render(renderContext);
 			renderTask.promise.then(function () {
 				document.getElementById("image").style.display = "none";
-				console.log('Page rendered');
+				document.getElementById("pdf").style.display = "block";
 			});
 		});
 	}, function (reason) {
