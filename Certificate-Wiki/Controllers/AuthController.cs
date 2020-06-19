@@ -12,6 +12,8 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Security.Claims;
 using System.Threading;
+using System.Drawing;
+using System.IO;
 
 namespace Certificate_Wiki.Controllers {
 
@@ -91,8 +93,11 @@ namespace Certificate_Wiki.Controllers {
 				Id = Guid.NewGuid().ToString(),
 				UserName = userManager.NormalizeEmail(model.Email), /*Username cannot be null in Identity*/
 				NormalizedEmail = userManager.NormalizeEmail(model.Email), /*Username cannot be null in Identity*/
-				Email = model.Email
+				Email = model.Email,
+				isPrivate = true
 			};
+
+			user.ProfilePicture = RandomProfilePicture();
 
 			var result = await userManager.CreateAsync(user, model.Password);
 
@@ -119,6 +124,19 @@ namespace Certificate_Wiki.Controllers {
 		public IActionResult logout() {
 			signInManager.SignOutAsync();
 			return RedirectToAction("index", "home");
+		}
+
+		public byte[] RandomProfilePicture() {
+			Random randomNumber = new Random();
+			int imageNumber = randomNumber.Next(1, 70);
+			return FileToBytes(Image.FromFile($@"wwwroot\images\profile\profile-picture\avatar ({imageNumber}).png"));
+		}
+
+		public byte[] FileToBytes(Image img) {
+			using (var ms = new MemoryStream()) {
+				img.Save(ms, img.RawFormat);
+				return ms.ToArray();
+			}
 		}
 	}
 }
