@@ -12,6 +12,9 @@
 <link rel="stylesheet" href="~/css/pages/ProfileEdit.css" media="all" />
 
 <div class="background"></div>
+<div class="validators">
+	<div asp-validation-summary="All"></div>
+</div>
 <div class="content">
 	<div class="content-image">
 		<img src="~/images/profile/Component 1 – 1.png" alt="" />
@@ -28,8 +31,6 @@
 		</div>
 		<div class="profile-form">
 			<h2>@User.Identity.Name</h2>
-			<div asp-validation-summary="All">
-			</div>
 			<form asp-action="Edit" method="post">
 
 				<div class="form-row">

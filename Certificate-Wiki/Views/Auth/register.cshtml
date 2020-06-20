@@ -4,6 +4,9 @@
 @model Certificate_Wiki.Models.LoginRegister.RegisterModel
 <link rel="stylesheet" href="~/css/pages/logreg.css" media="all" />
 <div class="background"></div>
+<div class="validators">
+	<div asp-validation-summary="All"></div>
+</div>
 <div class="content">
 	<div class="content-image">
 		<h1>Register Now,</h1>
@@ -22,7 +25,6 @@
 			<span>never</span>
 			send you unwanted emails
 		</p>
-		<div asp-validation-summary="All"></div>
 		<form asp-action="Register" method="post">
 			<div class="form-row">
 				<input class="text-input" asp-for="UserName" type="text" placeholder="username" />
