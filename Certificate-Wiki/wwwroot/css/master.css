@@ -1,4 +1,4 @@
-/*Header*/
+﻿/*Header*/
 
 header {
   width: 100%;
@@ -136,3 +136,18 @@ form {
   display: flex;
   flex-direction: column;
 }
+
+.validators {
+    margin: 0 auto;
+}
+
+    .validators li {
+        font-family: var(--font-header);
+        font-weight: 600;
+        text-align: center;
+    }
+
+        .validators li::before {
+            content: "❌ ";
+        }
+
