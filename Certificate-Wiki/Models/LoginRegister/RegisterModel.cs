@@ -7,7 +7,13 @@ using System.Threading.Tasks;
 namespace Certificate_Wiki.Models.LoginRegister {
 
 	public class RegisterModel {
+
 		//These variables does not respect the IdentityUser options
+		[Required]
+		[MinLength(3, ErrorMessage = "Username must be longer than 3 characters")]
+		[MaxLength(64, ErrorMessage = "Username must be less than 64 characters")]
+		public string UserName { get; set; }
+
 		[Required]
 		[MinLength(3, ErrorMessage = "Email must be entered")]
 		[MaxLength(64, ErrorMessage = "Email must be less than 64 characters")]

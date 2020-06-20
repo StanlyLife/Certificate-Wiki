@@ -39,29 +39,22 @@ namespace Certificate_Wiki.Controllers {
 		public async Task<IActionResult> loginAsync(LoginModel model) {
 			if (!ModelState.IsValid) { Console.WriteLine("Modelstate invalid"); return View(model); }
 
-			var user = await userManager.FindByEmailAsync(model.Email);
+			var user = await userManager.FindByNameAsync(model.UserName);
 
 			if (user == null) {
-				ModelState.AddModelError("All", "No user with that email exists");
+				ModelState.AddModelError("All", "No user with that username exists");
 				return View(model);
 			}
 
 			var result = await userManager.CheckPasswordAsync(user, model.Password);
 			if (!result) {
-				ModelState.AddModelError("All", "Password did not match email");
+				ModelState.AddModelError("All", "Password did not match user");
 				return View(model);
 			}
 
 			//2FA
 
-			//Add claims
-			var claims = new List<Claim> {
-			new Claim(ClaimTypes.NameIdentifier, user.Id),
-			new Claim(ClaimTypes.Email, user.Email),
-			new Claim(ClaimTypes.Name, user.UserName)
-			};
-			var Identity = new ClaimsIdentity(claims, IdentityConstants.ApplicationScheme);
-			await HttpContext.SignInAsync(IdentityConstants.ApplicationScheme, new ClaimsPrincipal(Identity));
+			await signInManager.PasswordSignInAsync(user, model.Password, true, false);
 			//Login
 
 			// ADD lockout
@@ -91,7 +84,7 @@ namespace Certificate_Wiki.Controllers {
 			//Register user
 			user = new CertificateUser {
 				Id = Guid.NewGuid().ToString(),
-				UserName = userManager.NormalizeEmail(model.Email), /*Username cannot be null in Identity*/
+				UserName = model.UserName, /*Username cannot be null in Identity*/
 				NormalizedEmail = userManager.NormalizeEmail(model.Email), /*Username cannot be null in Identity*/
 				Email = model.Email,
 				isPrivate = true
