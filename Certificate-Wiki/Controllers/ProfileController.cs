@@ -54,7 +54,7 @@ namespace Certificate_Wiki.Controllers {
 		[Authorize]
 		[Route("Profile/edit")]
 		public async Task<IActionResult> EditAsync() {
-			var Profile = await userManager.FindByEmailAsync(User.Identity.Name);
+			var Profile = await userManager.FindByNameAsync(User.Identity.Name);
 			if (Profile == null) { return View(); }
 			return View(Profile);
 		}
@@ -65,7 +65,7 @@ namespace Certificate_Wiki.Controllers {
 		[Route("Profile/edit")]
 		public async Task<IActionResult> EditAsync([FromForm]CertificateUser model, [FromForm] string cropped) {
 			if (!ModelState.IsValid) { return View(model); }
-			var Profile = await userManager.FindByEmailAsync(User.Identity.Name);
+			var Profile = await userManager.FindByNameAsync(User.Identity.Name);
 			if (Profile == null) { return View(); }
 
 			//Update database

@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="~/css/pages/viewprofile.css" media="all" />
 <script src="https://kit.fontawesome.com/f3cae94d9e.js" crossorigin="anonymous"></script>
 <div class="background"></div>
-@if (Model.profile == null || (Model.profile.isPrivate && Model.profile.NormalizedEmail != User.Identity.Name )) {
+@if (Model.profile == null || (Model.profile.isPrivate && Model.profile.UserName != User.Identity.Name )) {
 
 <div class="content">
 	<div class="header">

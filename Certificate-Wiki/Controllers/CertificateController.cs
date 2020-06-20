@@ -80,7 +80,7 @@ namespace Certificate_Wiki.Controllers {
 			if (user == null) { return RedirectToAction("logout", "auth"); }
 			FavoriteAndCertificateModel viewModel = new FavoriteAndCertificateModel {
 				certificate = CertificateHandler.GetByUserId(user.Id),
-				profile = await userManager.FindByEmailAsync(User.Identity.Name)
+				profile = user
 			};
 			foreach (var cert in viewModel.certificate.ToList()) {
 				bool isFavorite = favoriteHandler.CheckUserFavortite(user.Id, cert.CertificateId);
