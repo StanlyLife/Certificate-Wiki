@@ -32,7 +32,7 @@ namespace Certificate_Wiki.Controllers {
 		[Route("Search/{page:int?}/{search?}")]
 		public IActionResult Index(string search, int? page) {
 			SearchModel searchModel = new SearchModel { search = search };
-			if(page.HasValue) { searchModel.page = page.Value; }
+			if (page.HasValue) { searchModel.page = page.Value; }
 			if (String.IsNullOrWhiteSpace(search)) {
 				searchModel = SearchDefaultResult(searchModel, page);
 				return View(searchModel);
@@ -60,12 +60,7 @@ namespace Certificate_Wiki.Controllers {
 				currentPage = page.Value;
 			}
 
-			if (searchModel.search.Contains("@")) {
-				//TODO
-				//Add functionality
-				searchModel.certificateUsers = userSearch.SearchUserName(searchModel.search);
-				return searchModel;
-			}
+			searchModel.certificateUsers = userSearch.SearchUserName(searchModel.search);
 
 			int searchResult = certificateHandler.GetCertificatesPagesResultAmount(searchModel.search);
 			searchModel.resultPages = (int)Math.Ceiling(Decimal.Divide(searchResult, resultsPerPage));
