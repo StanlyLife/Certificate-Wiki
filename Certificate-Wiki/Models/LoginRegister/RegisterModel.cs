@@ -19,6 +19,7 @@ namespace Certificate_Wiki.Models.LoginRegister {
 		[MaxLength(64, ErrorMessage = "Email must be less than 64 characters")]
 		public string Email { get; set; }
 
+		[Required]
 		[MinLength(6, ErrorMessage = "Password must excede 5 characters")]
 		[MaxLength(64, ErrorMessage = "Password must be less than 64 characters")]
 		[DataType(DataType.Password)]
