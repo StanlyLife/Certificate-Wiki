@@ -14,6 +14,9 @@ using System.Security.Claims;
 using System.Threading;
 using System.Drawing;
 using System.IO;
+using Certificate_Wiki.Services;
+using System.Reflection.Metadata.Ecma335;
+using System.Reflection.Metadata;
 
 namespace Certificate_Wiki.Controllers {
 
@@ -21,11 +24,18 @@ namespace Certificate_Wiki.Controllers {
 		private readonly UserManager<CertificateUser> userManager;
 		private readonly IUserClaimsPrincipalFactory<CertificateUser> claimsPrincipalFactory;
 		private readonly SignInManager<CertificateUser> signInManager;
+		private readonly IEmailSender emailSender;
 
-		public AuthController(UserManager<CertificateUser> UserManager, IUserClaimsPrincipalFactory<CertificateUser> ClaimsPrincipalFactory, SignInManager<CertificateUser> signInManager) {
+		public AuthController(
+			UserManager<CertificateUser> UserManager,
+			IUserClaimsPrincipalFactory<CertificateUser> ClaimsPrincipalFactory,
+			SignInManager<CertificateUser> signInManager,
+			IEmailSender emailSender
+			) {
 			userManager = UserManager;
 			claimsPrincipalFactory = ClaimsPrincipalFactory;
 			this.signInManager = signInManager;
+			this.emailSender = emailSender;
 		}
 
 		[HttpGet]
@@ -102,21 +112,89 @@ namespace Certificate_Wiki.Controllers {
 
 			Console.WriteLine("registered!");
 			return RedirectToAction("login");
-			//TODO
-			//Email confirmation
-			//Send link to email
-		}
-
-		[Route("Forgotpassword")]
-		public IActionResult forgotpassword() {
-			//TODO
-			//implement
-			return View();
 		}
 
 		public IActionResult logout() {
 			signInManager.SignOutAsync();
 			return RedirectToAction("index", "home");
+		}
+
+		[HttpGet]
+		[Route("Forgotpassword")]
+		public IActionResult forgotpassword() {
+			return View();
+		}
+
+		[HttpPost]
+		[Route("Forgotpassword")]
+		public async Task<IActionResult> forgotpasswordAsync(ForgotPasswordModel model) {
+			if (!ModelState.IsValid) {
+				return View(model);
+			}
+
+			CertificateUser user = null;
+			if (!string.IsNullOrWhiteSpace(model.email)) {
+				user = await userManager.FindByEmailAsync(model.email);
+			} else if (!string.IsNullOrWhiteSpace(model.userName)) {
+				user = await userManager.FindByNameAsync(model.userName);
+			} else {
+				ModelState.AddModelError("All", "Enter a valid email or username");
+			}
+
+			if (user == null) {
+				ModelState.AddModelError("All", "No user found with that mail or username");
+				return View(model);
+			}
+
+			var token = await userManager.GeneratePasswordResetTokenAsync(user);
+			var resetUrl = Url.Action("ResetPassword", "Auth", new { token = token, email = user.Email }, Request.Scheme);
+
+			//System.IO.File.WriteAllText("resetLink.txt", resetUrl);
+			//Send email to user
+			List<string> emailList = new List<string> { user.Email };
+			await emailSender.SendEmailAsync(emailList, "Certificate.Wiki PASSWORD RESET",
+				"<h1>Reset password</h1> <br> <hr> <br>" +
+				$" <a href=\"{resetUrl}\"> <h3> Click here to reset password </h3>  </a>"+
+				"<style>" +
+				"h3 {" +
+				"color: cyan;" +
+				"}" +
+				"</style>"
+				);
+			Console.WriteLine("reset password email sent");
+			return View();
+		}
+
+		[HttpGet]
+		public IActionResult ResetPassword(string token, string email) {
+			ResetPasswordModel model = new ResetPasswordModel {
+				token = token,
+				email = email
+			};
+			return View(model);
+		}
+
+		//[HttpPost]
+		public async Task<IActionResult> ResetPasswordAsync(ResetPasswordModel model) {
+			if (!ModelState.IsValid) {
+				return View(model);
+			}
+
+			CertificateUser user = null;
+			user = await userManager.FindByEmailAsync(model.email);
+			if (user == null) {
+				ModelState.AddModelError("All", $"user not found, email may be incorrect {model.email}");
+			}
+
+			var result = await userManager.ResetPasswordAsync(user, model.token, model.password);
+
+			if (!result.Succeeded) {
+				foreach (var error in result.Errors) {
+					ModelState.AddModelError("All", error.ToString());
+				}
+			}
+
+			return RedirectToAction("login", "auth");
 		}
 
 		public byte[] RandomProfilePicture() {
