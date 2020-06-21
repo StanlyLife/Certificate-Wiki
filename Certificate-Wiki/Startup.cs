@@ -7,6 +7,8 @@ using Certificate_Wiki.Data;
 using Certificate_Wiki.Interface;
 using Certificate_Wiki.Interface.Implementation;
 using Certificate_Wiki.Models;
+using Certificate_Wiki.Services;
+using Certificate_Wiki.TokenProviders;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -33,6 +35,8 @@ namespace Certificate_Wiki {
 			services.AddScoped<IFavoriteHandler, FavoriteHandler>();
 			services.AddScoped<IUserSearch, UserSearch>();
 			services.AddControllersWithViews();
+
+			services.AddTransient<IEmailSender, EmailSender>();
 
 			services.AddRazorPages()
 		.AddRazorRuntimeCompilation();
@@ -66,7 +70,15 @@ namespace Certificate_Wiki {
 				options.LoginPath = "/login";
 				options.ReturnUrlParameter = "";
 				options.AccessDeniedPath = "/404";
-				});
+			});
+
+			services.Configure<DataProtectionTokenProviderOptions>(options => {
+				options.TokenLifespan = TimeSpan.FromMinutes(30);
+			});
+
+			services.Configure<EmailConfirmationTokenProviderOptions>(options => {
+				options.TokenLifespan = TimeSpan.FromDays(30);
+			});
 		}
 
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env) {
