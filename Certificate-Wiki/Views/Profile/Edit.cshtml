@@ -10,6 +10,7 @@
 }
 
 <link rel="stylesheet" href="~/css/pages/ProfileEdit.css" media="all" />
+<script src="https://kit.fontawesome.com/f3cae94d9e.js" crossorigin="anonymous"></script>
 
 <div class="background"></div>
 <div class="validators">
@@ -18,16 +19,15 @@
 <div class="content">
 	<div class="content-image">
 		<img src="~/images/profile/Component 1 – 1.png" alt="" />
-
 	</div>
 	<div class="content-profile">
 		<div class="profile-image">
+			<i class="fa fa-pencil" id="change-profile-picture-icon"></i>
 			@if (user.ProfilePicture != null && !String.IsNullOrWhiteSpace(Convert.ToBase64String(user.ProfilePicture))) {
 				<img src="@string.Format("data:image/png;base64,{0}", Convert.ToBase64String(user.ProfilePicture))" alt="Profile image" id="profile-image" />
 			} else {
 				<img src="https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png" alt="error loading image" id="profile-image" />
 			}
-
 		</div>
 		<div class="profile-form">
 			<h2>@User.Identity.Name</h2>
@@ -96,11 +96,7 @@
 			</div>
 		</div>
 	</div>
-
 </div>
-
-
-
 
 <script src="~/js/DeleteBtn.js"></script>
 <script>
@@ -115,7 +111,7 @@
 		modal.style.display = "none";
 	}
 
-	var profileButton = $("#profile-image");
+	var profileButton = $("#change-profile-picture-icon");
 	profileButton.on("click", function () {
 		modal.style.display = "block";
 		$uploadCrop.croppie('bind');
@@ -161,7 +157,6 @@
 	$("#changeImageButton").on("click", function () {
 		$("#changeImage").focus().trigger("click");
 	});
-
 </script>
 
 <script src="~/js/FormInputs.js"></script>
