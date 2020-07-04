@@ -21,6 +21,13 @@ namespace Certificate_Wiki.Controllers {
 		private readonly IFavoriteHandler favoriteHandler;
 		private readonly SignInManager<CertificateUser> signInManager;
 
+		private List<string> allowedFiles = new List<string> {
+				"pdf",
+				"png",
+				"jpg",
+				"jpeg",
+			};
+
 		public CertificateController(ICertificateHandler certificateHandler,
 			UserManager<CertificateUser> userManager,
 			IFavoriteHandler favoriteHandler,
@@ -125,6 +132,10 @@ namespace Certificate_Wiki.Controllers {
 
 			if (file != null) {
 				//file upload
+				var fileType = ValidateFileName(file);
+				if (!fileType) {
+					ModelState.AddModelError("All", "File can only be: pdf, png, jpg or jpeg");
+				}
 				model.CertificateUrl = null;
 				model.CertificateFile = FileToBytes(file);
 				model.CertificateFileName = file.FileName;
@@ -156,6 +167,15 @@ namespace Certificate_Wiki.Controllers {
 			CertificateHandler.Create(model);
 			//If user is CREATING
 			return RedirectToAction("user");
+		}
+
+		private bool ValidateFileName(IFormFile file) {
+			foreach (string ending in allowedFiles) {
+				if (file.FileName.ToString().ToLower().EndsWith(ending)) {
+					return true;
+				}
+			}
+			return false;
 		}
 
 		[ValidateAntiForgeryToken]
