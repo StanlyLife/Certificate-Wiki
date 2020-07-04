@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using Certificate_Wiki.Models;
 
 namespace Certificate_Wiki.Controllers {
+
 	public class HomeController : Controller {
 		private readonly ILogger<HomeController> _logger;
 
@@ -19,7 +20,8 @@ namespace Certificate_Wiki.Controllers {
 			return View();
 		}
 
-		public IActionResult Privacy() {
+		[Route("About")]
+		public IActionResult About() {
 			return View();
 		}
 
