@@ -110,8 +110,9 @@ namespace Certificate_Wiki.Controllers {
 				return View(model);
 			}
 
-			Console.WriteLine("registered!");
-			return RedirectToAction("login");
+			//If you get here, registration was successful
+			await signInManager.PasswordSignInAsync(user.UserName, model.Password, true ,false);
+			return RedirectToAction("edit", "profile");
 		}
 
 		public IActionResult logout() {
