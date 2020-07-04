@@ -11,6 +11,10 @@
     --font-roboto: "Roboto", sans-serif;
 }
 
+body {
+    overflow-x: hidden;
+}
+
 *,
 *:before,
 *:after {
