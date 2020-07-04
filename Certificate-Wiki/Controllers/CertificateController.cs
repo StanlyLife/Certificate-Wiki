@@ -133,8 +133,12 @@ namespace Certificate_Wiki.Controllers {
 			if (file != null) {
 				//file upload
 				var fileType = ValidateFileName(file);
+				var fileSize = ValidateFileSize(file);
 				if (!fileType) {
-					ModelState.AddModelError("All", "File can only be: pdf, png, jpg or jpeg");
+					ModelState.AddModelError("All", "File can only be of type: pdf, png, jpg or jpeg");
+				}
+				if (!fileSize) {
+					ModelState.AddModelError("All", "Max file size is 750kb");
 				}
 				model.CertificateUrl = null;
 				model.CertificateFile = FileToBytes(file);
@@ -167,6 +171,15 @@ namespace Certificate_Wiki.Controllers {
 			CertificateHandler.Create(model);
 			//If user is CREATING
 			return RedirectToAction("user");
+		}
+
+		private bool ValidateFileSize(IFormFile file) {
+			if (file.Length > 750 * 1000) {
+				//Max file size: 750kb
+				return false;
+			} else {
+				return true;
+			}
 		}
 
 		private bool ValidateFileName(IFormFile file) {
