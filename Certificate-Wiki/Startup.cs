@@ -42,9 +42,11 @@ namespace Certificate_Wiki {
 		.AddRazorRuntimeCompilation();
 
 			services.AddDbContext<CertificateDbContext>(options => {
-				var connectionString = "Data Source=(LocalDb)\\MSSQLLocalDB;" +
-											   "database=LocalCertifyDb;" +
-											   "trusted_connection=yes;";
+				//var connectionString = "Data Source=(LocalDb)\\MSSQLLocalDB;" +
+				//							   "database=LocalCertifyDb;" +
+				//							   "trusted_connection=yes;";
+
+				var connectionString = Configuration.GetConnectionString("default");
 
 				var myMigrationAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
 				options.UseSqlServer(connectionString, sql => {
@@ -53,7 +55,6 @@ namespace Certificate_Wiki {
 			});
 
 			services.AddIdentity<CertificateUser, IdentityRole>(options => {
-				//Change this before deployment
 				options.SignIn.RequireConfirmedEmail = false;
 
 				options.Password.RequireNonAlphanumeric = false;
