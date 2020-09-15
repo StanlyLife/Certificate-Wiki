@@ -99,8 +99,7 @@ namespace Certificate_Wiki.Controllers {
 				Email = model.Email,
 				isPrivate = true
 			};
-
-			user.ProfilePicture = RandomProfilePicture();
+			//user.ProfilePicture = RandomProfilePicture();
 
 			var result = await userManager.CreateAsync(user, model.Password);
 
@@ -111,7 +110,7 @@ namespace Certificate_Wiki.Controllers {
 			}
 
 			//If you get here, registration was successful
-			await signInManager.PasswordSignInAsync(user.UserName, model.Password, true ,false);
+			await signInManager.PasswordSignInAsync(user.UserName, model.Password, true, false);
 			return RedirectToAction("edit", "profile");
 		}
 
@@ -155,7 +154,7 @@ namespace Certificate_Wiki.Controllers {
 			List<string> emailList = new List<string> { user.Email };
 			await emailSender.SendEmailAsync(emailList, "Certificate.Wiki PASSWORD RESET",
 				"<h1>Reset password</h1> <br> <hr> <br>" +
-				$" <a href=\"{resetUrl}\"> <h3> Click here to reset password </h3>  </a>"+
+				$" <a href=\"{resetUrl}\"> <h3> Click here to reset password </h3>  </a>" +
 				"<style>" +
 				"h3 {" +
 				"color: cyan;" +
@@ -198,17 +197,17 @@ namespace Certificate_Wiki.Controllers {
 			return RedirectToAction("login", "auth");
 		}
 
-		public byte[] RandomProfilePicture() {
-			Random randomNumber = new Random();
-			int imageNumber = randomNumber.Next(1, 70);
-			return FileToBytes(Image.FromFile($@"wwwroot\images\profile\profile-picture\avatar ({imageNumber}).png"));
-		}
+		//public byte[] RandomProfilePicture() {
+		//	Random randomNumber = new Random();
+		//	int imageNumber = randomNumber.Next(1, 70);
+		//	return FileToBytes(Image.FromFile($@"wwwroot\images\profile\profile-picture\avatar ({imageNumber}).png"));
+		//}
 
-		public byte[] FileToBytes(Image img) {
-			using (var ms = new MemoryStream()) {
-				img.Save(ms, img.RawFormat);
-				return ms.ToArray();
-			}
-		}
+		//public byte[] FileToBytes(Image img) {
+		//	using (var ms = new MemoryStream()) {
+		//		img.Save(ms, img.RawFormat);
+		//		return ms.ToArray();
+		//	}
+		//}
 	}
 }
