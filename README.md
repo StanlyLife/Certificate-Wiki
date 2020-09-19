@@ -15,7 +15,13 @@ This project is a remake of [certify](https://github.com/StanlyLife/Certify) and
 <details>
   <summary>Stack</summary>
   
-  ### WIP
+  - .NET Core
+    - Entity framework
+    - Identity
+  - Css
+  - Javascript
+    - [cropperJS](https://fengyuanchen.github.io/cropperjs/)
+  
   
 </details>
 
@@ -40,5 +46,5 @@ This project is a remake of [certify](https://github.com/StanlyLife/Certify) and
   
 </details>
 
-
+[![ebe88d023697c244ab27e4e042ffb156.png](https://s1.gifyu.com/images/ebe88d023697c244ab27e4e042ffb156.png)](https://gifyu.com/image/467R)
 [![8033481c72fb7465ca1de6041734ca00.png](https://s7.gifyu.com/images/8033481c72fb7465ca1de6041734ca00.png)](https://gifyu.com/image/u81s)
